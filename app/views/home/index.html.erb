@@ -1,0 +1,13 @@
+<h1> Welcome </h1>
+
+<% if session[:access_token] %>
+	<%=link_to 'Log Out', '/user/logout'%> </br>
+  <%=form_tag ("/user") do%>
+	  <%= label_tag 'Email'%>
+	  <%= email_field_tag 'email'%>
+	  <%= submit_tag "Submit" %>  
+  <%end%>
+  
+<% else %>
+  <%= link_to 'Authorize via timestack', new_oauth_token_path %>
+<% end %>

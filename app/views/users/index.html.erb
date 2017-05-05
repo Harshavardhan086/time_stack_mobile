@@ -1,0 +1,44 @@
+<h1>Enter Time Entry for Today</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Day</th>
+			<th>Project</th>
+			<th>Task</th>
+			<th>Hours</th>
+			<th>Description</th>
+			<th>Sick</th>
+			<th>Personal</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><%=@today_time_entry['date_of_activity'].to_time.strftime("%Y-%m-%d")%></td>
+			<td><%=@today_time_entry['date_of_activity'].to_time.strftime("%A")%></td>
+			<td><%=select_tag :project, options_for_select(@projects), :include_blank => true%></td>
+			<td><%=select_tag :task, options_for_select([]), :include_blank => true%></td>
+			<%if @today_time_entry['hours'].nil? %>
+				<td><%=text_field_tag 'hours' %></td>
+			<%else%>
+				<td><%=text_field_tag 'hours', @today_time_entry['hours']%></td>
+			<%end%>
+			<%if @today_time_entry['activity_log'].nil? %>
+				<td><%=text_area_tag 'activity_log' %></td>
+			<%else%>
+				<td><%=text_area_tag 'activity_log', @today_time_entry['activity_log']%></td>
+			<%end%>
+			<%if @today_time_entry['sick'] == false %>
+				<td><%=check_box_tag 'sick', @user['id'], false %></td>
+			<%else%>
+				<td><%=check_box_tag 'sick', @user['id'], true%></td>
+			<%end%>
+			<%if @today_time_entry['personal_day'] == false %>
+				<td><%=check_box_tag 'personal_day', @user['id'], false %></td>
+			<%else%>
+				<td><%=check_box_tag 'personal_day', @user['id'], true%></td>
+			<%end%>
+		</tr>
+	</tbody>
+</table>
