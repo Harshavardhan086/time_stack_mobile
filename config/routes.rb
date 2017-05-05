@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   get '/user/details', to: 'users#show'
   get '/user/logout', to: 'sessions#destroy'
   get '/project_tasks', to: 'users#project_tasks'
+  post '/users/user_update', to: 'users#user_update'
 end
