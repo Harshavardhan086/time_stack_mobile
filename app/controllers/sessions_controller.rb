@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def create
-    req_params = "client_id=#{CONFIG['oauth_token']}&client_secret=#{CONFIG['oauth_secret']}&code=#{params[:code]}&grant_type=authorization_code&redirect_uri=#{CONFIG['oauth_redirect_uri']}&email='harsha@test.com'"
+    req_params = "client_id=#{CONFIG['oauth_token']}&client_secret=#{CONFIG['oauth_secret']}&code=#{params[:code]}&grant_type=authorization_code&redirect_uri=#{CONFIG['oauth_redirect_uri']}&email='harshavardhan.gandhari@resourcestack.com'"
     response = JSON.parse RestClient.post("#{CONFIG['server_base_url']}/oauth/token", req_params)
     logger.debug("******RESPONSE: #{response} ")
     session[:access_token] = response['access_token']
