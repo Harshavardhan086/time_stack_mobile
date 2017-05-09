@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
 
   def oauth_client
-    @oauth_client ||= OAuth2::Client.new(ENV["oauth_token"], ENV["oauth_secret"],site: ENV["server_base_url"])
+    @oauth_client ||= OAuth2::Client.new(CONFIG["oauth_token"], CONFIG["oauth_secret"],site: CONFIG["server_base_url"])
     logger.debug("OAUTH CLIENT IS: #{@oauth_client}**********")
     @oauth_client
   end
