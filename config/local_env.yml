@@ -1,4 +1,0 @@
-server_base_url: 'http://dev3.resourcestack.com'
-oauth_token: 'e261753bcdd72d34d98918fe2e997e7a0a040a740bbbaf479a26059b2007ff2a' 
-oauth_secret: '8ac2764c3caa1e625c53e0cae84ea2c3520a828aa21d92a32c877462856ce203'
-oauth_redirect_uri: 'https://dev8.resourcestack.com/oauth/callback'
