@@ -1,14 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { timeEntryComponent} from './time-entry';
+import { HomeComponent } from './home/home.component';
+import { TimeEntryComponent} from './time-entry/time-entry.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
+	{
+    path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'time-entry',
+    pathMatch: 'full',
+    component: TimeEntryComponent
   }
  ];
 
