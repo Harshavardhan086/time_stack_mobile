@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { TimeEntryComponent} from './time-entry/time-entry.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'home',
@@ -25,7 +30,7 @@ const routes: Routes = [
  ];
 
  @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash:true})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 

@@ -8,11 +8,14 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="time-entry"><i class="fa fa-calendar"></i></a>
       </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="login"><i class="fa fa-anchor"></i></a>
+      </li>
     </ul>
 
     <ul class="nav navbar-nav ml-auto">
-      <li class="nav-item" routerLinkActive="active" *ngIf="!auth.authenticated">
-        <a class="nav-link" routerLink="auth">Login | Register</a>
+      <li class="nav-item" routerLinkActive="active" *ngIf="auth.authenticated">
+        <a class="nav-link" routerLink="login">Login | Register</a>
       </li>
       <li class="nav-item" *ngIf="auth.authenticated">
         <a class="nav-link" routerLink="home" (click)="auth.logout()"><span class="fa fa-power-off"></span> Logout</a>
