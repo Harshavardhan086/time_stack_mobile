@@ -17,7 +17,10 @@ export class LoginComponent implements OnInit {
 	response:any;
 
 
-constructor(private fb: FormBuilder, private cs: CurrentUserService, private uAuthService: AuthService, private router: Router) { 
+constructor(private fb: FormBuilder, 
+            private cs: CurrentUserService, 
+            private uAuthService: AuthService, 
+            private router: Router) { 
       this.createForm();
   }
     ngOnInit() {
@@ -35,6 +38,9 @@ constructor(private fb: FormBuilder, private cs: CurrentUserService, private uAu
   		this.reqTokenObj.email = this.userInfo.userName;
   		this.reqTokenObj.password = this.userInfo.userPassword;
   		this.uAuthService.getAuthToken(this.reqTokenObj).subscribe(res => {
+        console.log('auth response:', res);
+          console.log('auth response headers: ', res.headers.toJSON()); //log the response header to show the auth token
+          console.log('auth response body:', res.json()); //log the response body to show the user 
   			this.response = res;
   			if(this.response.authentication_token){
   				this.router.navigate(['/home']);
