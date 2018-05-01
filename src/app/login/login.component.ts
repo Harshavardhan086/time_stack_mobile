@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { Http } from '@angular/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { CurrentUserService } from '../services/current-user.service';
@@ -17,18 +16,19 @@ export class LoginComponent implements OnInit {
 	token = String;
 	response:any;
 
-  constructor(private fb: FormBuilder, private cs: CurrentUserService, private uAuthService: AuthService, private router: Router,) { 
-  	this.createForm();
-  }
 
-  ngOnInit() {
+constructor(private fb: FormBuilder, private cs: CurrentUserService, private uAuthService: AuthService, private router: Router) { 
+      this.createForm();
+  }
+    ngOnInit() {
   }
   createForm(){
-  	this.loginForm = this.fb.group({
-  		userName: ['',Validators.required],
-  		userPassword: ['', Validators.required]
-  	})
+    this.loginForm = this.fb.group({
+      userName:['', Validators.required],
+      userPassword: ['', Validators.required]
+    })
   };
+
   login(){
   	this.userInfo = this.loginForm.value;
   	if(this.userInfo.userName && this.userInfo.userPassword){

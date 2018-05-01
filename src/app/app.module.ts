@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClient,HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 //services
 import { ApiInterceptor } from './services/api-interceptor';
 import { AuthService } from './services/auth.service';
@@ -30,6 +31,7 @@ import { LoginComponent } from './login/login.component'
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     NgbModule.forRoot()
   ],
