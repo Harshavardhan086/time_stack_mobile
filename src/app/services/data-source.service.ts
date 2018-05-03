@@ -20,7 +20,7 @@ export class DataSourceService {
   }
 // Get user list
 getUsers(reqObj): Observable<Object>{
-	return this.http.post("http://localhost:3000/api/get_all_users",reqObj, this.httpOptions).map(res=>{
+	return this.http.post("http://localhost:3000/api/login_user",reqObj, this.httpOptions).map(res=>{
     return res;
 	});
 	};
