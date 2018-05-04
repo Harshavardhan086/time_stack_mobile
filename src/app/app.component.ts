@@ -24,35 +24,6 @@ export class AppComponent implements OnInit {
   }
   ngOnInit() {
     //this.http.get('http://localhost:3000/api/get_all_users').subscribe(json => console.log(json));
-    this.getUsers();
-  }
 
-  getUsers(){
-    this.reqObj.email = this.cus.getCurrentUser();
-    this.ds.getUsers(this.reqObj).subscribe(res=>{
-      this.response = res;
-      if(this.response.status == 'ok'){
-        this.userList = this.getUserList(this.response);
-        console.log(res)
-        console.dir(this.userList)
-      }
-    }, err=>{
-      console.log(err);
-    });
-  }
-
-  getUserList(response){
-    if ((response.users_data.length )){
-      var ul:any[] = [];
-      ul = response.users_data;
-      for(let i =0; i<response.users_data.length;++i){
-        var ui: any = {};
-        ui.email= response.users_data[i]['email'];
-        ul[i]['userInfo'] = ui;
-      }
-      return ul;
-    } else {
-      return [];
-    }
-  }
+  };
 }

@@ -24,4 +24,10 @@ getUsers(reqObj): Observable<Object>{
     return res;
 	});
 	};
+    // Submit TimeEntry 
+  sendTimeEntry(reqObj): Observable<Object>{
+    return this.http.post("http://localhost:3000/api/login_user", reqObj, this.httpOptions).map(res =>{
+      return res; 
+    });
+  };
 }

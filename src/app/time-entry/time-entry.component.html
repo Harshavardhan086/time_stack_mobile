@@ -1,61 +1,55 @@
-<div style="text-align:center">
-  <div class="container" style="margin-top: 10px;">
+<div class="body-wrapper clearfix">
+  <section class="fSection">
+    <div class="row form-field-wrapper">
+      <div class="col-sm-12">
 
-    <div class="row">
-      <div class="col">
-        
-        <h1>Select Project</h1>
-        <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Project</button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button class="dropdown-item">TimeStack</button>
-            <button class="dropdown-item">DentistLink</button>
-            <button class="dropdown-item">RepoMan</button>
-          </div>
+        <form id="entryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
 
-           <h1>Select Task</h1>
-           <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Task</button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-            <button class="dropdown-item">TimeStack</button>
-            <button class="dropdown-item">DentistLink</button>
-            <button class="dropdown-item">RepoMan</button>
-          </div>
-
-        </div>
-      </div>
-
-    <div class = "row">
-    	<div class ="col">
-    		<h1>Hours</h1>
-    		<input type="text" name="hours" >
-    	</div>
-    </div>
-
-    <div class = "row">
-    	<div class ="col">
-    		<h1>Vacation</h1>
-    		<input type="string" name="vacation">
-    	</div>
-    </div>
-
-    <div class = "row">
-    	<div class ="col">
-    		<h1>Description</h1>
-    		<input type="string" name="Description" required minlength="4">
-    	</div>
-    </div>
-
-    <div class="_clearfix"></div>
-        <div class="row">
-            <div class="col-sm-12">
-                <a  class="btn btn-default">Save</a>
-                <a  class="btn btn-primary">Submit</a>
+            <div class="row">
+                <div class="col-sm-12">
+                  <label class="label_txt" for="Hours"> Hours ?<sup>*</sup></label>
+                  <input type="text" class="cust_input" formControlName="Hours"  placeholder="Enter Hours Worked" required/>
+                </div>
             </div>
-        </div>
+            <!-- <div class="_clearfix"></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="label_txt" for="lastName">Patient's last name:?<sup>*</sup></label>
+                    <input type="text" class="cust_input" formControlName="last_name"  placeholder="Enter Last Name" required/>
+                </div>
+            </div>
+            <div class="_clearfix"></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="label_txt">Patient Phone Number:?<sup>*</sup></label>
+                    <input type="text" class="cust_input" formControlName="patient_phone" placeholder="Phone Number" required>
+                </div>
+            </div>
+            <div class="_clearfix"></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="label_txt">Healthcare coverage:?<sup>*</sup></label>
+                    <select class="cust_input" formControlName="reason_for_visit" required>
+                        <option *ngFor="let vr of visitList" [ngValue]="vr">{{vr}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="_clearfix"></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="label_txt">Patient ID number for the coverage?<sup>*</sup></label>
+                    <input type="text" class="cust_input" formControlName="Patient_coverage" placeholder="Patient Id number" required>
+                </div>
+            </div> -->
+            <div class="_clearfix"></div>
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    <button type="submit" class="btn cust_btn submit" *ngIf="appointmentAction != 'Edit'">Submit</button>
+                    <button type="submit" class="btn cust_btn submit" *ngIf="appointmentAction == 'Edit'">Update</button>
+                </div>
+            </div>
+        </form>
+      </div>
     </div>
-
+  </section>
 </div>
-</div>
-
-
