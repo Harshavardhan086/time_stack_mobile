@@ -20,22 +20,34 @@ export class TimeEntryComponent implements OnInit {
 	reqObj:any = {};
 	response: any = {};
 	appointmentAction: string = '';
+  timeEntry: any;
+  Hours: any;
+
 
   constructor(	private fb: FormBuilder,
   				private router: Router,
   				private uAuthService: AuthService,
   				private cs: CurrentUserService,
   				private ds: DataSourceService){
-  			this.createForm();
+  			
   				};
 
   ngOnInit() {
+    this.reqObj.email = this.cs.getCurrentUser();
+    this.uAuthService.getTimeEntry(this.reqObj).subscribe(res => {
+          console.log('auth response:', res);
+          this.router.navigate(['/time-entry']);
+          this.timeEntry = res;
+          
+          });
+    this.createForm();
   };
 createForm(){
+  console.log(this.timeEntry)
     this.newEntryForm = this.fb.group({
       project:[''],
       tasks: [''],
-      Hours: [''],
+      Hours: [this.timeEntry.hours],
       vacation:[''],
       description: ['']
     })
