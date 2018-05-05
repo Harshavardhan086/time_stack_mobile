@@ -6,6 +6,7 @@ import { DataSourceService } from '../services/data-source.service';
 import { AuthService } from '../services/auth.service';
 
 
+
 @Component({
   selector: 'app-time-entry',
   templateUrl: './time-entry.component.html',
@@ -21,6 +22,8 @@ export class TimeEntryComponent implements OnInit {
 	response: any = {};
 	appointmentAction: string = '';
 
+
+
   constructor(	private fb: FormBuilder,
   				private router: Router,
   				private uAuthService: AuthService,
@@ -35,7 +38,7 @@ createForm(){
     this.newEntryForm = this.fb.group({
       project:[''],
       tasks: [''],
-      Hours: [''],
+      hours: [''],
       vacation:[''],
       description: ['']
     })
