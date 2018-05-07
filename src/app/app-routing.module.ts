@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService } from './services/auth-guard.service';
 
 import { HomeComponent } from './home/home.component';
 import { TimeEntryComponent} from './time-entry/time-entry.component';
@@ -11,7 +12,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
@@ -24,8 +25,8 @@ const routes: Routes = [
   },
   {
     path: 'time-entry',
-    pathMatch: 'full',
-    component: TimeEntryComponent
+    component: TimeEntryComponent,
+    canActivate: [AuthGuardService]
   }
  ];
 

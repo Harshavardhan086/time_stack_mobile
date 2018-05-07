@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import {HttpClient,HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 //services
@@ -9,6 +9,7 @@ import { AuthService } from './services/auth.service';
 import { JwtService } from './services/jwt.service';
 import { CurrentUserService } from './services/current-user.service';
 import { DataSourceService } from './services/data-source.service';
+import { AuthGuardService } from './services/auth-guard.service';
 //components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,9 +34,8 @@ import { LoginComponent } from './login/login.component'
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgbModule.forRoot()
   ],
-  providers: [AuthService, JwtService ,CurrentUserService, DataSourceService,
+  providers: [AuthService, AuthGuardService, JwtService ,CurrentUserService, DataSourceService,
       { 
       provide: HTTP_INTERCEPTORS, 
       useClass: ApiInterceptor, 
