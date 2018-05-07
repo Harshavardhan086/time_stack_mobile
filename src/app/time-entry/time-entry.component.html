@@ -3,44 +3,43 @@
     <div class="row form-field-wrapper">
       <div class="col-sm-12">
 
+
         <form id="entryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
 
+            #Project_Id
             <div class="row">
                 <div class="col-sm-12">
-                  <label class="label_txt" for="Hours"> Hours ?<sup>*</sup></label>
-                  <input type="text" class="cust_input" formControlName="Hours"  placeholder="Enter Hours Worked" required/>
+                  <label class="label_txt" for="hours"> Hours<sup>*</sup></label>
+                  <input type="text" class="cust_input" formControlName="hours"  placeholder="Enter Hours Worked" required/>
                 </div>
             </div>
-            <!-- <div class="_clearfix"></div>
+            #Task_Id
             <div class="row">
                 <div class="col-sm-12">
-                    <label class="label_txt" for="lastName">Patient's last name:?<sup>*</sup></label>
-                    <input type="text" class="cust_input" formControlName="last_name"  placeholder="Enter Last Name" required/>
+                  <label class="label_txt" for="hours"> Hours<sup>*</sup></label>
+                  <input type="text" class="cust_input" formControlName="hours"  placeholder="Enter Hours Worked" required/>
                 </div>
             </div>
-            <div class="_clearfix"></div>
+             <div class="_clearfix"></div>
             <div class="row">
                 <div class="col-sm-12">
-                    <label class="label_txt">Patient Phone Number:?<sup>*</sup></label>
-                    <input type="text" class="cust_input" formControlName="patient_phone" placeholder="Phone Number" required>
+                  <label class="label_txt" for="hours"> Hours<sup>*</sup></label>
+                  <input type="text" class="cust_input" formControlName="hours"  placeholder="Enter Hours Worked" required/>
                 </div>
             </div>
-            <div class="_clearfix"></div>
             <div class="row">
                 <div class="col-sm-12">
-                    <label class="label_txt">Healthcare coverage:?<sup>*</sup></label>
-                    <select class="cust_input" formControlName="reason_for_visit" required>
-                        <option *ngFor="let vr of visitList" [ngValue]="vr">{{vr}}</option>
-                    </select>
+                  <label class="label_txt" for="vacation"> Vacation Type <sup>*</sup></label>
+                  <input type="text" class="cust_input" formControlName="vacation"  placeholder="Enter Vacation Type" required/>
                 </div>
             </div>
-            <div class="_clearfix"></div>
             <div class="row">
                 <div class="col-sm-12">
-                    <label class="label_txt">Patient ID number for the coverage?<sup>*</sup></label>
-                    <input type="text" class="cust_input" formControlName="Patient_coverage" placeholder="Patient Id number" required>
+                  <label class="label_txt" for="description"> Description<sup>*</sup></label>
+                  <input type="text" class="cust_input" formControlName="description"  placeholder="Work notes" required/>
                 </div>
-            </div> -->
+            </div>
+            
             <div class="_clearfix"></div>
             <div class="row">
                 <div class="col-sm-12 text-right">
@@ -48,6 +47,7 @@
                     <button type="submit" class="btn cust_btn submit" *ngIf="appointmentAction == 'Edit'">Update</button>
                 </div>
             </div>
+
         </form>
       </div>
     </div>
