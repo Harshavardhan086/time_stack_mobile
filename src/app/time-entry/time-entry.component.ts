@@ -34,7 +34,6 @@ export class TimeEntryComponent implements OnInit {
     this.reqObj.email = this.cs.getCurrentUser();
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
           console.log('timeEntry response:', res);
-
           this.timeEntry = res;
           if (this.timeEntry.status === 'ok') {
             const entryDetails = this.timeEntry.timeEntry_hash;
@@ -70,10 +69,10 @@ createForm(){
     this.reqObj.email = this.cs.getCurrentUser();
     console.log(this.reqObj)
     //call the data.source method to deliver items
-    this.ds.sendTimeEntry(this.reqObj).subscribe(response =>{
-      this.response = response;
-      if(this.response.status == 'ok'){
-        alert(this.response.message)
+    this.ds.sendTimeEntry(this.reqObj).subscribe(timeEntry =>{
+      this.timeEntry = timeEntry;
+      if(this.timeEntry.status == 'ok'){
+        alert(this.timeEntry.message)
       }
     }, err => {
       console.log(err);
