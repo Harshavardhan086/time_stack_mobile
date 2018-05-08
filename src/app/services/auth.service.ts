@@ -22,6 +22,16 @@ export class AuthService {
   		return res;
   	});
   };
+  //get time entry
+  getTimeEntry(reqObj): Observable<Object>{
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+    return this.http.post("http://localhost:3000/api/get_time_entry", reqObj, httpOptions).map(res =>{
+      console.log(res);
+      this.cs.setAuth(res)
+      return res;
+    });
+  };
+  
 }
 interface authTokenType{
   application_representative: any,
