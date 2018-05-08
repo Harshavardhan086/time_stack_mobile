@@ -1,6 +1,6 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormArray} from '@angular/forms';
 import { CurrentUserService } from '../services/current-user.service';
 import { DataSourceService } from '../services/data-source.service';
 import { AuthService } from '../services/auth.service';
@@ -33,20 +33,22 @@ export class TimeEntryComponent implements OnInit {
   ngOnInit() {
     this.reqObj.email = this.cs.getCurrentUser();
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
-          console.log('auth response:', res);
+          console.log('timeEntry response:', res);
+
           this.timeEntry = res;
           if (this.timeEntry.status === 'ok') {
             const entryDetails = this.timeEntry.timeEntry_hash;
+
             (<FormGroup>this.newEntryForm)
-              .patchValue({tasks: entryDetails.task_id}, {onlySelf: true});
+              .patchValue({task_id: entryDetails.task_id}, {onlySelf: true});
             (<FormGroup>this.newEntryForm)
-              .patchValue({project: entryDetails.project_id}, {onlySelf: true});
+              .patchValue({project_id: entryDetails.project_id}, {onlySelf: true});
             (<FormGroup>this.newEntryForm)
               .patchValue({hours: entryDetails.hours}, {onlySelf: true});
             (<FormGroup>this.newEntryForm)
-              .patchValue({vacation: entryDetails.vacation_type_id}, {onlySelf: true});
+              .patchValue({vacation_type_id: entryDetails.vacation_type_id}, {onlySelf: true});
             (<FormGroup>this.newEntryForm)
-              .patchValue({description: entryDetails.activity_log}, {onlySelf: true});
+              .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
               console.log(this.newEntryForm.value)
             }
           }, err => {
@@ -55,13 +57,12 @@ export class TimeEntryComponent implements OnInit {
     this.createForm();
   };
 createForm(){
-  console.log(this.timeEntry)
     this.newEntryForm = this.fb.group({
-      project:[''],
-      tasks: [''],
+      project_id: [''],
+      task_id: [''],
       hours: [''],
-      vacation:[''],
-      description: ['']
+      vacation_type_id: [''],
+      activity_log: ['']
     })
   }
   createEntry(){
