@@ -19,10 +19,8 @@ export class TimeEntryComponent implements OnInit {
 	visitList: String[];
 	newEntryForm: FormGroup;
 	reqObj:any = {};
-	response: any = {};
 	appointmentAction: string = '';
-  timeEntry: any;
-  Hours: any;
+  timeEntry: any = {};
 
   constructor(	private fb: FormBuilder,
   				private router: Router,
@@ -36,10 +34,9 @@ export class TimeEntryComponent implements OnInit {
     this.reqObj.email = this.cs.getCurrentUser();
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
           console.log('auth response:', res);
-          this.router.navigate(['/time-entry']);
           this.timeEntry = res;
-          if (this.response.status === 'ok') {
-            const entryDetails = this.response.timeEntry_hash;
+          if (this.timeEntry.status === 'ok') {
+            const entryDetails = this.timeEntry.timeEntry_hash;
             (<FormGroup>this.newEntryForm)
               .patchValue({tasks: entryDetails.task_id}, {onlySelf: true});
             (<FormGroup>this.newEntryForm)
@@ -50,7 +47,7 @@ export class TimeEntryComponent implements OnInit {
               .patchValue({vacation: entryDetails.vacation_type_id}, {onlySelf: true});
             (<FormGroup>this.newEntryForm)
               .patchValue({description: entryDetails.activity_log}, {onlySelf: true});
-              console.log(this. newEntryForm.value)
+              console.log(this.newEntryForm.value)
             }
           }, err => {
             console.log(err);
