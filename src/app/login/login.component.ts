@@ -15,6 +15,9 @@ export class LoginComponent implements OnInit {
 	reqTokenObj = <authType>{};
 	token = String;
 	response:any;
+  timeEntry: any;
+  hours: any;
+
 
 
 constructor(private fb: FormBuilder, 
@@ -43,7 +46,10 @@ constructor(private fb: FormBuilder,
         //console.log('auth response body:', res.json()); //log the response body to show the user 
   			this.response = res;
   			if(this.response.authentication_token){
-  				this.router.navigate(['/time-entry']);
+  				
+          console.log('auth response:', res);
+          this.router.navigate(['/time-entry']);
+          
   			}else {
   				alert(this.response.message)
   			}
