@@ -4,20 +4,20 @@
       <div class="col-sm-12">
 
 
-        <form id="entryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
+        <form id="newEntryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
 
-            #Project_Id
+            <!--Project_Id-->
             <div class="row">
                 <div class="col-sm-12">
-                  <label class="label_txt" for="hours"> Hours<sup>*</sup></label>
-                  <input type="text" class="cust_input" formControlName="hours"  placeholder="Enter Hours Worked" required/>
+                  <label class="label_txt" for="project"> Project<sup>*</sup></label>
+                  <input type="text" class="cust_input" formControlName="project"  placeholder="project" required/>
                 </div>
             </div>
-            #Task_Id
+            <!--Task_Id -->
             <div class="row">
                 <div class="col-sm-12">
-                  <label class="label_txt" for="hours"> Hours<sup>*</sup></label>
-                  <input type="text" class="cust_input" formControlName="hours"  placeholder="Enter Hours Worked" required/>
+                  <label class="label_txt" for="tasks"> Tasks<sup>*</sup></label>
+                  <input type="text" class="cust_input" formControlName="tasks"  placeholder="tasks" required/>
                 </div>
             </div>
              <div class="_clearfix"></div>

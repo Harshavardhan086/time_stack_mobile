@@ -24,9 +24,6 @@ export class TimeEntryComponent implements OnInit {
   timeEntry: any;
   Hours: any;
 
-
-
-
   constructor(	private fb: FormBuilder,
   				private router: Router,
   				private uAuthService: AuthService,
@@ -41,7 +38,22 @@ export class TimeEntryComponent implements OnInit {
           console.log('auth response:', res);
           this.router.navigate(['/time-entry']);
           this.timeEntry = res;
-          
+          if (this.response.status === 'ok') {
+            const entryDetails = this.response.timeEntry_hash;
+            (<FormGroup>this.newEntryForm)
+              .patchValue({tasks: entryDetails.task_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({project: entryDetails.project_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({hours: entryDetails.hours}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({vacation: entryDetails.vacation_type_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({description: entryDetails.activity_log}, {onlySelf: true});
+              console.log(this. newEntryForm.value)
+            }
+          }, err => {
+            console.log(err);
           });
     this.createForm();
   };
