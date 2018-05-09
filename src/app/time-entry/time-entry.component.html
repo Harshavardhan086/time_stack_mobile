@@ -8,42 +8,42 @@
         <form id="newEntryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
 
             <!--Project_Id-->
-            <div class="row">
+            <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
-                  <label class="label_txt" for="project_id"> Project<sup>*</sup></label>
+                  <label class="label_txt col-sm-4" for="project_id"> Project<sup>*</sup></label>
                   <input type="text" class="cust_input" formControlName="project_id"  placeholder="project" required/>
                 </div>
             </div>
             <!--Task_Id -->
-            <div class="row">
+            <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
-                  <label class="label_txt" for="task_id"> Tasks<sup>*</sup></label>
-                  <input type="text" class="cust_input" formControlName="task_id"  placeholder="tasks" required/>
+                  <label class="label_txt col-sm-4" for="task_id"> Tasks<sup>*</sup></label>
+                  <input type="text" class="cust_input col-sm-8" formControlName="task_id"  placeholder="tasks" required/>
                 </div>
             </div>
              <div class="_clearfix"></div>
-            <div class="row">
+            <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
-                  <label class="label_txt" for="hours"> Hours<sup>*</sup></label>
+                  <label class="label_txt col-sm-4" for="hours"> Hours<sup>*</sup></label>
                   <input type="text" class="cust_input" formControlName="hours"  placeholder="Enter Hours Worked" required/>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
-                  <label class="label_txt" for="vacation_type_id"> Vacation Type <sup>*</sup></label>
+                  <label class="label_txt col-sm-4" for="vacation_type_id"> Vacation Type <sup>*</sup></label>
                   <input type="text" class="cust_input" formControlName="vacation_type_id"  placeholder="Enter Vacation Type" required/>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
-                  <label class="label_txt" for="description"> Description<sup>*</sup></label>
+                  <label class="label_txt col-sm-4" for="description"> Description<sup>*</sup></label>
                   <input type="text" class="cust_input" formControlName="activity_log"  placeholder="Work notes" required/>
                 </div>
             </div>
             
             <div class="_clearfix"></div>
-            <div class="row">
-                <div class="col-sm-12 text-right">
+            <div class="row" style="padding:10px;">
+                <div class="col-sm-12 text-center">
                     <button type="submit" class="btn cust_btn submit" *ngIf="appointmentAction != 'Edit'">Submit</button>
                     <button type="submit" class="btn cust_btn submit" *ngIf="appointmentAction == 'Edit'">Update</button>
                 </div>
