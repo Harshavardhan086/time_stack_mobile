@@ -77,7 +77,8 @@ createForm(){
     }, err => {
       console.log(err);
     });
-    this.router.navigate(['/home'])
+    this.router.navigate(['/time_entry'])
+    alert("successful update");
   }
 
 }
