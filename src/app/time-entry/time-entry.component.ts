@@ -14,29 +14,27 @@ import { AuthService } from '../services/auth.service';
 })
 export class TimeEntryComponent implements OnInit {
 	// initialize variables
-	time = {hour: 13, minute: 30};
-	relations:String[];
-	visitList: String[];
 	newEntryForm: FormGroup;
 	reqObj:any = {};
-	appointmentAction: string = '';
   timeEntry: any = {};
 
   constructor(	private fb: FormBuilder,
-  				private router: Router,
-  				private uAuthService: AuthService,
-  				private cs: CurrentUserService,
-  				private ds: DataSourceService){
-  			
+        				private router: Router,
+        				private uAuthService: AuthService,
+        				private cs: CurrentUserService,
+        				private ds: DataSourceService){
   				};
 
   ngOnInit() {
     this.reqObj.email = this.cs.getCurrentUser();
+    this.reqObj.id = this.timeEntry.id
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
           console.log('timeEntry response:', res);
           this.timeEntry = res;
           if (this.timeEntry.status === 'ok') {
             const entryDetails = this.timeEntry.timeEntry_hash;
+             (<FormGroup>this.newEntryForm)
+              .patchValue({id: entryDetails.id}, {onlySelf: true});
 
             (<FormGroup>this.newEntryForm)
               .patchValue({task_id: entryDetails.task_id}, {onlySelf: true});
@@ -61,10 +59,12 @@ createForm(){
       task_id: [''],
       hours: [''],
       vacation_type_id: [''],
-      activity_log: ['']
+      activity_log: [''],
+      id: [this.timeEntry.id]
     })
   }
-  createEntry(){
+
+  createEntry(data: any){
     this.reqObj = this.newEntryForm.value;
     this.reqObj.email = this.cs.getCurrentUser();
     console.log(this.reqObj)
