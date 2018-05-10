@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 import {HttpClient,HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 //services
 import { ApiInterceptor } from './services/api-interceptor';
 import { AuthService } from './services/auth.service';
@@ -17,7 +19,8 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { TimeEntryComponent } from './time-entry/time-entry.component';
 import { FooterComponent } from './footer/footer.component';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
+import { DatePickerComponent } from './date-picker/date-picker.component';
 
 
 @NgModule({
@@ -27,12 +30,14 @@ import { LoginComponent } from './login/login.component'
     HeaderComponent,
     TimeEntryComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    DatePickerComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
   ],
   providers: [AuthService, AuthGuardService, JwtService ,CurrentUserService, DataSourceService,

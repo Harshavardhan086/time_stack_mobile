@@ -27,15 +27,15 @@ export class TimeEntryComponent implements OnInit {
 
   ngOnInit() {
     this.reqObj.email = this.cs.getCurrentUser();
-    this.reqObj.id = this.timeEntry.id
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
           console.log('timeEntry response:', res);
           this.timeEntry = res;
           if (this.timeEntry.status === 'ok') {
             const entryDetails = this.timeEntry.timeEntry_hash;
-             (<FormGroup>this.newEntryForm)
+            (<FormGroup>this.newEntryForm)
               .patchValue({id: entryDetails.id}, {onlySelf: true});
-
+            (<FormGroup>this.newEntryForm)
+              .patchValue({week_id: entryDetails.week_id}, {onlySelf: true});
             (<FormGroup>this.newEntryForm)
               .patchValue({task_id: entryDetails.task_id}, {onlySelf: true});
             (<FormGroup>this.newEntryForm)
@@ -53,6 +53,34 @@ export class TimeEntryComponent implements OnInit {
           });
     this.createForm();
   };
+tomorrow(){
+  this.reqObj.email = this.cs.getCurrentUser();
+  this.ds.tomorrow(this.reqObj).subscribe(res => {
+          console.log('tomorrows timeentry:', res);
+          this.timeEntry = res;
+          if (this.timeEntry.status === 'ok') {
+            const entryDetails = this.timeEntry.timeEntry_hash;
+            (<FormGroup>this.newEntryForm)
+              .patchValue({id: entryDetails.id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({week_id: entryDetails.week_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({task_id: entryDetails.task_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({project_id: entryDetails.project_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({hours: entryDetails.hours}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({vacation_type_id: entryDetails.vacation_type_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
+              console.log(this.newEntryForm.value)
+            }
+          }, err => {
+            console.log(err);
+          });
+
+}
 createForm(){
     this.newEntryForm = this.fb.group({
       project_id: [''],
@@ -60,7 +88,8 @@ createForm(){
       hours: [''],
       vacation_type_id: [''],
       activity_log: [''],
-      id: [this.timeEntry.id]
+      id: [this.timeEntry.id],
+      week_id: [this.timeEntry.week_id]
     })
   }
 
