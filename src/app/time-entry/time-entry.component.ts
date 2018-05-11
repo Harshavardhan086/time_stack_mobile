@@ -14,12 +14,15 @@ import { AuthService } from '../services/auth.service';
 })
 export class TimeEntryComponent implements OnInit {
 	// initialize variables
+  today = Date.now();  
 	newEntryForm: FormGroup;
+  newDateForm: FormGroup;
 	reqObj:any = {};
   timeEntry: any = {};
   dropDown:any =[];
   dSelected:Number;
   modifiedtext:string;
+  someobj:any = [];
 
   constructor(	private fb: FormBuilder,
         				private router: Router,
@@ -30,6 +33,7 @@ export class TimeEntryComponent implements OnInit {
 
   ngOnInit() {
     this.reqObj.email = this.cs.getCurrentUser();
+
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
           console.log('timeEntry response:', res);
           this.timeEntry = res;
@@ -39,6 +43,8 @@ export class TimeEntryComponent implements OnInit {
             const entryDetails = this.timeEntry.timeEntry_hash;
             (<FormGroup>this.newEntryForm)
               .patchValue({id: entryDetails.id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({user_id: entryDetails.user_id}, {onlySelf: true});
             (<FormGroup>this.newEntryForm)
               .patchValue({week_id: entryDetails.week_id}, {onlySelf: true});
             (<FormGroup>this.newEntryForm)
@@ -75,9 +81,35 @@ createForm(){
       hours: [''],
       vacation_type_id: [''],
       activity_log: [''],
+      user_id: [this.timeEntry.user_id],
       id: [this.timeEntry.id],
       week_id: [this.timeEntry.week_id]
+    });
+     this.newDateForm = this.fb.group({
+      date_of_activity: [''],
     })
+  };
+
+//update_date
+
+  update_date(){
+
+      this.reqObj.date_of_activity = this.dSelected
+      this.reqObj.email = this.newEntryForm.value.user_id
+      //pass the parameters
+    this.ds.update_date(this.reqObj).subscribe(timeEntry =>{
+      this.timeEntry = timeEntry;
+          if (this.timeEntry.status === 'ok') {
+            this.dropDown = this.timeEntry.date_of_activity;
+            console.log(this.dropDown)
+            //update this to new hash
+
+           }
+          }, err => {
+            console.log(err);
+          });
+
+    this.createForm();
   };
 
   createEntry(data: any){
@@ -96,5 +128,5 @@ createForm(){
     this.router.navigate(['/time_entry'])
     alert("successful update");
   }
+};
 
-}

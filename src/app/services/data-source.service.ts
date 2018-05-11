@@ -41,12 +41,11 @@ export class DataSourceService {
     });
   };
 
-  // Jump to tomorrows entry.
-    tomorrow(reqObj): Observable<Object>{
-    return this.http.post("http://localhost:3000/api/tomorrow_entry", reqObj, this.httpOptions).map(res =>{
+  //Jump to another time entry
+  update_date(reqObj): Observable<Object>{
+    return this.http.post("http://localhost:3000/api/update_date", reqObj, this.httpOptions).map(res =>{
       console.log(res);
       this.cs.setAuth(res)
       return res;
     });
   };
-}

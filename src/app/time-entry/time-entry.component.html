@@ -1,23 +1,23 @@
-<div style ="margin: auto; width: 50%; border: 3px solid green; padding: 10px">
-  <select [(ngModel)] ="dSelected" (ngModelChange)='onDaySelected($event)'>
-    <option *ngFor="let d of dropDown" [ngValue] ="d">
-      {{d}}
-    </option>
-  </select>
-  
-  <br>
-  {{modifiedtext}}
-  
-</div> 
+          <!--Date Selection -->
+            <div style ="margin: auto; width: 50%; border: 3px solid #6AA6EE; padding: 10px">
+              <h4>Jump To Another Date:</h4>
+              <select [(ngModel)] ="dSelected" (ngModelChange)='onDaySelected($event)'>
+                <option *ngFor="let d of dropDown" [ngValue] ="d">
+                  {{d}}
+                </option>
+              </select>
+               <button type="submit"  class="btn cust_btn submit" (click) = "update_date(d)">Update</button>
+                <br>
+                {{modifiedtext}}
+            </div> 
+
 
 <div class="body-wrapper clearfix">
   <section class="fSection">
     <div class="row form-field-wrapper">
       <div class="col-sm-12">
-
-
+        <p>Today is {{today | date: 'EEEE, MMMM d, y' }}</p>
         <form id="newEntryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
-
             <!--Project_Id-->
             <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
@@ -32,6 +32,7 @@
                   <input type="text" class="cust_input col-sm-8" formControlName="task_id"  placeholder="tasks" required/>
                 </div>
             </div>
+            <!--Hours -->
              <div class="_clearfix"></div>
             <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
@@ -39,19 +40,21 @@
                   <input type="text" class="cust_input" formControlName="hours"  placeholder="Enter Hours Worked" required/>
                 </div>
             </div>
+            <!--Vacation -->
             <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
                   <label class="label_txt col-sm-4" for="vacation_type_id"> Vacation Type <sup>*</sup></label>
                   <input type="text" class="cust_input" formControlName="vacation_type_id"  placeholder="Enter Vacation Type" required/>
                 </div>
             </div>
+            <!--description/activity_log -->
             <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
                   <label class="label_txt col-sm-4" for="description"> Description<sup>*</sup></label>
                   <input type="text" class="cust_input" formControlName="activity_log"  placeholder="Work notes" required/>
                 </div>
             </div>
-            
+            <!-- send it off -->
             <div class="_clearfix"></div>
             <div class="row" style="padding:10px;">
                 <div class="col-sm-12 text-center">
