@@ -18,6 +18,8 @@ export class TimeEntryComponent implements OnInit {
 	reqObj:any = {};
   timeEntry: any = {};
   dropDown:any =[];
+  dSelected:Number;
+  modifiedtext:string;
 
   constructor(	private fb: FormBuilder,
         				private router: Router,
@@ -33,6 +35,7 @@ export class TimeEntryComponent implements OnInit {
           this.timeEntry = res;
           if (this.timeEntry.status === 'ok') {
             this.dropDown = this.timeEntry.date_of_activity;
+            console.log(this.dropDown)
             const entryDetails = this.timeEntry.timeEntry_hash;
             (<FormGroup>this.newEntryForm)
               .patchValue({id: entryDetails.id}, {onlySelf: true});
@@ -53,10 +56,17 @@ export class TimeEntryComponent implements OnInit {
           }, err => {
             console.log(err);
           });
-    //Implement Dropdown
+
     this.createForm();
   };
-
+  //Pulls value from DropDown
+onDaySelected(val:any){
+  this.customFunction(val);
+  console.log(val)
+} // Displays what time_entry the user is working on
+customFunction(val:any){
+  this.modifiedtext = "Time Entry Selection:" + val 
+}
 
 createForm(){
     this.newEntryForm = this.fb.group({
