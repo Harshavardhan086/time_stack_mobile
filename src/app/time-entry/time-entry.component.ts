@@ -22,7 +22,7 @@ export class TimeEntryComponent implements OnInit {
   dropDown:any =[];
   dSelected:Number;
   modifiedtext:string;
-  someobj:any = [];
+
 
   constructor(	private fb: FormBuilder,
         				private router: Router,
@@ -33,7 +33,6 @@ export class TimeEntryComponent implements OnInit {
 
   ngOnInit() {
     this.reqObj.email = this.cs.getCurrentUser();
-
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
           console.log('timeEntry response:', res);
           this.timeEntry = res;
@@ -130,7 +129,7 @@ createForm(){
 
   createEntry(data: any){
     this.reqObj = this.newEntryForm.value;
-    this.reqObj.email = this.cs.getCurrentUser();
+    this.reqObj.email = "mason.bartlett@resourcestack.com"
     console.log(this.reqObj)
     //call the data.source method to deliver items
     this.ds.sendTimeEntry(this.reqObj).subscribe(timeEntry =>{
