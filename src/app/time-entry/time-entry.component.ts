@@ -102,9 +102,25 @@ createForm(){
           if (this.timeEntry.status === 'ok') {
             this.dropDown = this.timeEntry.date_of_activity;
             console.log(this.dropDown)
-            //update this to new hash
-
-           }
+            const entryDetails = this.timeEntry.timeEntry_hash;
+            (<FormGroup>this.newEntryForm)
+              .patchValue({id: entryDetails.id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({user_id: entryDetails.user_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({week_id: entryDetails.week_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({task_id: entryDetails.task_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({project_id: entryDetails.project_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({hours: entryDetails.hours}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({vacation_type_id: entryDetails.vacation_type_id}, {onlySelf: true});
+            (<FormGroup>this.newEntryForm)
+              .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
+              console.log(this.newEntryForm.value)
+            }
           }, err => {
             console.log(err);
           });
