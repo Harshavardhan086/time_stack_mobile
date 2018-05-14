@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-	today = Date.now();	
+  today = Date.now();	
 
   constructor() { }
 

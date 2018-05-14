@@ -9,6 +9,7 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
 	userInfo :loginType;
@@ -20,14 +21,15 @@ export class LoginComponent implements OnInit {
 
 
 
-constructor(private fb: FormBuilder, 
-            private cs: CurrentUserService, 
-            private uAuthService: AuthService, 
-            private router: Router) { 
+  constructor(private fb: FormBuilder, 
+              private cs: CurrentUserService, 
+              private uAuthService: AuthService, 
+              private router: Router) { 
       this.createForm();
   }
-    ngOnInit() {
-  }
+
+  ngOnInit() {}
+
   createForm(){
     this.loginForm = this.fb.group({
       userName:['', Validators.required],
@@ -37,19 +39,21 @@ constructor(private fb: FormBuilder,
 
   login(){
   	this.userInfo = this.loginForm.value;
+
   	if(this.userInfo.userName && this.userInfo.userPassword){
   		this.reqTokenObj.email = this.userInfo.userName;
   		this.reqTokenObj.password = this.userInfo.userPassword;
   		this.uAuthService.getAuthToken(this.reqTokenObj).subscribe(res => {
         console.log('auth response:', res);
         //console.log('auth response headers: ', res.headers.toJSON()); //log the response header to show the auth token
+
         //console.log('auth response body:', res.json()); //log the response body to show the user 
   			this.response = res;
+
   			if(this.response.authentication_token){
-  				
           console.log('auth response:', res);
-          this.router.navigate(['/time-entry']);
           
+          this.router.navigate(['/time-entry']); 
   			}else {
   				alert(this.response.message)
   			}
@@ -63,14 +67,17 @@ constructor(private fb: FormBuilder,
   }
 
 }
+
 interface loginType{
 	userName: String,
 	userPassword: any
 }
+
 interface authType{
 	email: String,
 	password: String
 }
+
 interface authTokenType{
 	application_representative: any,
 	authentication_token: String,
