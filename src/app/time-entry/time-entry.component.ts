@@ -60,18 +60,20 @@ export class TimeEntryComponent implements OnInit {
             }
           }, err => {
             console.log(err);
+            alert("Please Start Current Week on Desktop App!");
+            this.router.navigate(['/home'])
           });
 
     this.createForm();
   };
-  //Pulls value from DropDown
-onDaySelected(val:any){
-  this.customFunction(val);
-  console.log(val)
-} // Displays what time_entry the user is working on
-customFunction(val:any){
-  this.modifiedtext = "Time Entry Selection:" + val 
-}
+      //Pulls value from DropDown
+    onDaySelected(val:any){
+      this.customFunction(val);
+      console.log(val)
+    } // Displays what time_entry the user is working on
+    customFunction(val:any){
+      this.modifiedtext = "Time Entry Selection:" + val 
+    }
 
 createForm(){
     this.newEntryForm = this.fb.group({
@@ -129,7 +131,7 @@ createForm(){
 
   createEntry(data: any){
     this.reqObj = this.newEntryForm.value;
-    this.reqObj.email = "mason.bartlett@resourcestack.com"
+    this.reqObj.email = this.cs.getCurrentUser();
     console.log(this.reqObj)
     //call the data.source method to deliver items
     this.ds.sendTimeEntry(this.reqObj).subscribe(timeEntry =>{
