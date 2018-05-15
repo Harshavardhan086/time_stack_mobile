@@ -9,9 +9,8 @@
   <button type="submit"  class="btn cust_btn submit" (click) = "update_date(d)">Update</button>
   <br>
   {{modifiedtext}}
-</div> 
-
-
+</div>  
+ 
 <div class="body-wrapper clearfix">
   <section class="fSection">
     <div class="row form-field-wrapper">
@@ -19,10 +18,15 @@
         <p>Today is {{today | date: 'EEEE, MMMM d, y' }}</p>
         <form id="newEntryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
             <!--Project_Id-->
+
             <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
-                  <label class="label_txt col-sm-4" for="project_id"> Project<sup>*</sup></label>
-                  <input type="text" class="cust_input" formControlName="project_id"  placeholder="project" required/>
+                  <label class="label_txt col-sm-4" for="project"> Project<sup>*</sup></label>
+                    <select [(ngModel)] ="pSelected" (ngModelChange)='onDaySelected($event)'>
+                     <option *ngFor="let p of project" [ngValue] ="p">
+                        {{p}}
+                     </option>
+                    </select>
                 </div>
             </div>
             <!--Task_Id -->

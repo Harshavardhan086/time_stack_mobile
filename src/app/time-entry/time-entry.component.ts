@@ -5,8 +5,6 @@ import { CurrentUserService } from '../services/current-user.service';
 import { DataSourceService } from '../services/data-source.service';
 import { AuthService } from '../services/auth.service';
 
-
-
 @Component({
   selector: 'app-time-entry',
   templateUrl: './time-entry.component.html',
@@ -22,6 +20,9 @@ export class TimeEntryComponent implements OnInit {
   dropDown:any =[];
   dSelected:Number;
   modifiedtext:string;
+  project:any=[];
+  pSelected:Number;
+
 
 
   constructor(	private fb: FormBuilder,
@@ -35,10 +36,10 @@ export class TimeEntryComponent implements OnInit {
     this.reqObj.email = this.cs.getCurrentUser();
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
           console.log('timeEntry response:', res);
-          
           this.timeEntry = res;
           if (this.timeEntry.status === 'ok') {
             this.dropDown = this.timeEntry.date_of_activity;
+            this.project = this.timeEntry.name;
             console.log(this.dropDown)
             const entryDetails = this.timeEntry.timeEntry_hash;
             (<FormGroup>this.newEntryForm)
@@ -61,20 +62,22 @@ export class TimeEntryComponent implements OnInit {
             }
           }, err => {
             console.log(err);
-            alert("Please Start Current Week on Desktop App!");
-            this.router.navigate(['/home'])
+            alert("Please Start Current Week on Desktop App!")
+            this.router.navigate(['/home']);
           });
-
-    this.createForm();
+    this.createForm(); 
   };
-    onDaySelected(val:any){
+
+
+
+  onDaySelected(val:any){
       this.customFunction(val);
       console.log(val)
-    } // Displays what time_entry the user is working on
-    customFunction(val:any){
-      this.modifiedtext = "Time Entry Selection:" + val 
-    }
-
+    };  
+  customFunction(val:any){
+      this.modifiedtext = "Time Entry Selection:" + val
+    };
+ 
   createForm(){
     this.newEntryForm = this.fb.group({
       project_id: [''],
@@ -95,7 +98,6 @@ export class TimeEntryComponent implements OnInit {
   update_date(){
     this.reqObj.date_of_activity = this.dSelected
     this.reqObj.email = this.newEntryForm.value.user_id
-    
     //pass the parameters
     this.ds.update_date(this.reqObj).subscribe(timeEntry =>{
       this.timeEntry = timeEntry;
