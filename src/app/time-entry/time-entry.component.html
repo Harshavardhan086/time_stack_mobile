@@ -1,15 +1,15 @@
-          <!--Date Selection -->
-            <div style ="margin: auto; width: 50%; border: 3px solid #6AA6EE; padding: 10px">
-              <h4>Jump To Another Date:</h4>
-              <select [(ngModel)] ="dSelected" (ngModelChange)='onDaySelected($event)'>
-                <option *ngFor="let d of dropDown" [ngValue] ="d">
-                  {{d}}
-                </option>
-              </select>
-               <button type="submit"  class="btn cust_btn submit" (click) = "update_date(d)">Update</button>
-                <br>
-                {{modifiedtext}}
-            </div> 
+<!--Date Selection -->
+<div style ="margin: auto; width: 50%; border: 3px solid #6AA6EE; padding: 10px">
+  <h4>Jump To Another Date:</h4>
+  <select [(ngModel)] ="dSelected" (ngModelChange)='onDaySelected($event)'>
+    <option *ngFor="let d of dropDown" [ngValue] ="d">
+      {{d}}
+    </option>
+  </select>
+  <button type="submit"  class="btn cust_btn submit" (click) = "update_date(d)">Update</button>
+  <br>
+  {{modifiedtext}}
+</div> 
 
 
 <div class="body-wrapper clearfix">
