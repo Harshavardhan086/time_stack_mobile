@@ -17,9 +17,11 @@ export class TimeEntryComponent implements OnInit {
   newDateForm: FormGroup;
 	reqObj:any = {};
   timeEntry: any = {};
+  //For the TimeEntryDropDown
   dropDown:any =[];
   dSelected:Number;
   modifiedtext:string;
+  //For Projects
   project:any=[];
   pSelected:Number;
 
@@ -63,12 +65,10 @@ export class TimeEntryComponent implements OnInit {
           }, err => {
             console.log(err);
             alert("Please Start Current Week on Desktop App!")
-            this.router.navigate(['/home']);
+            //this.router.navigate(['/home']);
           });
     this.createForm(); 
   };
-
-
 
   onDaySelected(val:any){
       this.customFunction(val);
@@ -77,6 +77,9 @@ export class TimeEntryComponent implements OnInit {
   customFunction(val:any){
       this.modifiedtext = "Time Entry Selection:" + val
     };
+   loadTasks(val:any){
+     console.log(val)
+   };
  
   createForm(){
     this.newEntryForm = this.fb.group({

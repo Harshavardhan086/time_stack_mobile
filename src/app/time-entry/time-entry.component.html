@@ -22,7 +22,7 @@
             <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
                   <label class="label_txt col-sm-4" for="project"> Project<sup>*</sup></label>
-                    <select [(ngModel)] ="pSelected" (ngModelChange)='onDaySelected($event)'>
+                    <select [(ngModel)] ="pSelected" (ngModelChange)='loadTasks(p)'>
                      <option *ngFor="let p of project" [ngValue] ="p">
                         {{p}}
                      </option>
