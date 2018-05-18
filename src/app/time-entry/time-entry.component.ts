@@ -11,21 +11,32 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./time-entry.component.scss']
 })
 export class TimeEntryComponent implements OnInit {
-	// initialize variables
+	
+  // initialize variables
   today = Date.now();  
 	newEntryForm: FormGroup;
   newDateForm: FormGroup;
 	reqObj:any = {};
   timeEntry: any = {};
-  //For the TimeEntryDropDown
+
+  //For the DateDropDown
   dropDown:any =[];
   dSelected:Number;
   modifiedtext:string;
+
   //For Projects
-  project:any=[];
+  project: any[];
   pSelected:Number;
 
+  //For Tasks
+  task: any=[];
+  taskHash: any={};
+  tSelected:Number;
 
+  //For vacations
+  vacation: any=[];
+  vacationHash: any={};
+  vSelected:Number;
 
   constructor(	private fb: FormBuilder,
         				private router: Router,
@@ -36,37 +47,44 @@ export class TimeEntryComponent implements OnInit {
 
   ngOnInit() {
     this.reqObj.email = this.cs.getCurrentUser();
+
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
-          console.log('timeEntry response:', res);
-          this.timeEntry = res;
-          if (this.timeEntry.status === 'ok') {
-            this.dropDown = this.timeEntry.date_of_activity;
-            this.project = this.timeEntry.name;
-            console.log(this.dropDown)
-            const entryDetails = this.timeEntry.timeEntry_hash;
-            (<FormGroup>this.newEntryForm)
-              .patchValue({id: entryDetails.id}, {onlySelf: true});
-            (<FormGroup>this.newEntryForm)
-              .patchValue({user_id: entryDetails.user_id}, {onlySelf: true});
-            (<FormGroup>this.newEntryForm)
-              .patchValue({week_id: entryDetails.week_id}, {onlySelf: true});
-            (<FormGroup>this.newEntryForm)
-              .patchValue({task_id: entryDetails.task_id}, {onlySelf: true});
-            (<FormGroup>this.newEntryForm)
-              .patchValue({project_id: entryDetails.project_id}, {onlySelf: true});
-            (<FormGroup>this.newEntryForm)
-              .patchValue({hours: entryDetails.hours}, {onlySelf: true});
-            (<FormGroup>this.newEntryForm)
-              .patchValue({vacation_type_id: entryDetails.vacation_type_id}, {onlySelf: true});
-            (<FormGroup>this.newEntryForm)
-              .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
-              console.log(this.newEntryForm.value)
-            }
-          }, err => {
-            console.log(err);
-            alert("Please Start Current Week on Desktop App!")
-            //this.router.navigate(['/home']);
-          });
+      console.log('timeEntry response:', res);
+      
+      this.timeEntry = res;
+      
+      if (this.timeEntry.status === 'ok') {
+        this.dropDown = this.timeEntry.date_of_activity;
+        this.project = this.timeEntry.avaliable_projects;
+        this.vacation = this.timeEntry.vacations;
+        console.log(this.dropDown)
+        
+        this.dSelected = Date.now();
+        const entryDetails = this.timeEntry.timeEntry_hash;
+          
+        (<FormGroup>this.newEntryForm)
+          .patchValue({id: entryDetails.id}, {onlySelf: true});
+        (<FormGroup>this.newEntryForm)
+          .patchValue({user_id: entryDetails.user_id}, {onlySelf: true});
+        (<FormGroup>this.newEntryForm)
+          .patchValue({week_id: entryDetails.week_id}, {onlySelf: true});
+        (<FormGroup>this.newEntryForm)
+          .patchValue({task: entryDetails.task_id}, {onlySelf: true});
+        (<FormGroup>this.newEntryForm)
+          .patchValue({project: entryDetails.project_id}, {onlySelf: true});
+        (<FormGroup>this.newEntryForm)
+          .patchValue({hours: entryDetails.hours}, {onlySelf: true});
+        (<FormGroup>this.newEntryForm)
+          .patchValue({vacation_type_id: entryDetails.vacation_type_id}, {onlySelf: true});
+        (<FormGroup>this.newEntryForm)
+          .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
+          console.log(this.newEntryForm.value)
+        }
+      }, err => {
+        console.log(err);
+        alert("Please Start Current Week on Desktop App!")
+      //this.router.navigate(['/home']);
+    });
     this.createForm(); 
   };
 
@@ -77,16 +95,34 @@ export class TimeEntryComponent implements OnInit {
   customFunction(val:any){
       this.modifiedtext = "Time Entry Selection:" + val
     };
-   loadTasks(val:any){
-     console.log(val)
-   };
+
+  loadTasks(val:any){
+
+    this.reqObj.email = this.newEntryForm.value.user_id
+    this.reqObj.project_id= val;
+    this.pSelected = val;
+    console.log(this);
+    this.ds.getTasks(this.reqObj).subscribe(res => {
+      console.log('task response:', res);
+      this.taskHash = res;
+      if (this.taskHash.status === 'ok') {
+        console.log(this.taskHash.task_hash.avaliable_tasks);      
+        this.task = this.taskHash.task_hash.avaliable_tasks;
+      }
+      }, err => {
+        console.log(err);
+        alert("Please Start Current Week on Desktop App!")
+        //this.router.navigate(['/home']);
+    });
+     
+  };
  
   createForm(){
     this.newEntryForm = this.fb.group({
-      project_id: [''],
-      task_id: [''],
+      project: [''],
+      task: [''],
       hours: [''],
-      vacation_type_id: [''],
+      vacation: [''],
       activity_log: [''],
       user_id: [this.timeEntry.user_id],
       id: [this.timeEntry.id],
@@ -115,13 +151,13 @@ export class TimeEntryComponent implements OnInit {
         (<FormGroup>this.newEntryForm)
           .patchValue({week_id: entryDetails.week_id}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
-          .patchValue({task_id: entryDetails.task_id}, {onlySelf: true});
+          .patchValue({task: entryDetails.task_id}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
-          .patchValue({project_id: entryDetails.project_id}, {onlySelf: true});
+          .patchValue({project: entryDetails.project_id}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
           .patchValue({hours: entryDetails.hours}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
-          .patchValue({vacation_type_id: entryDetails.vacation_type_id}, {onlySelf: true});
+          .patchValue({vacation: entryDetails.vacation_type_id}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
           .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
           console.log(this.newEntryForm.value)

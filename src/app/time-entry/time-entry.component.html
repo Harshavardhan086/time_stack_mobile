@@ -1,12 +1,12 @@
 <!--Date Selection -->
-<div style ="margin: auto; width: 50%; border: 3px solid #6AA6EE; padding: 10px">
-  <h4>Jump To Another Date:</h4>
+<div style ="margin: auto; width: 100%; border: 3px solid #6AA6EE; padding: 10px">
+  <h4>Select Date for Timesheet:</h4>
   <select [(ngModel)] ="dSelected" (ngModelChange)='onDaySelected($event)'>
     <option *ngFor="let d of dropDown" [ngValue] ="d">
       {{d}}
     </option>
   </select>
-  <button type="submit"  class="btn cust_btn submit" (click) = "update_date(d)">Update</button>
+  <button type="submit"  class="btn cust_btn submit" (click) = "update_date(d)">Fetch</button>
   <br>
   {{modifiedtext}}
 </div>  
@@ -19,25 +19,30 @@
         <form id="newEntryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
             <!--Project_Id-->
 
-            <div class="row" style="padding:10px;">
-                <div class="col-sm-12">
-                  <label class="label_txt col-sm-4" for="project"> Project<sup>*</sup></label>
-                    <select [(ngModel)] ="pSelected" (ngModelChange)='loadTasks(p)'>
-                     <option *ngFor="let p of project" [ngValue] ="p">
-                        {{p}}
-                     </option>
-                    </select>
-                </div>
+          <div class="row" style="padding:10px;">
+            <div class="col-sm-12">
+              <label class="label_txt col-sm-4" for="project"> Project<sup>*</sup></label>
+
+                <select id="project" formControlName="project" required="required" (change)='loadTasks($event.target.value)'>
+                  <option *ngFor="let p of project" [ngValue] ="p.id">
+                    {{p.name}}
+                  </option>
+                </select>
             </div>
-            <!--Task_Id -->
-            <div class="row" style="padding:10px;">
-                <div class="col-sm-12">
-                  <label class="label_txt col-sm-4" for="task_id"> Tasks<sup>*</sup></label>
-                  <input type="text" class="cust_input col-sm-8" formControlName="task_id"  placeholder="tasks" required/>
-                </div>
+          </div>
+          <!--Task_Id -->
+          <div class="row" style="padding:10px;">
+            <div class="col-sm-12">
+              <label class="label_txt col-sm-4" for="task"> Tasks<sup>*</sup></label>
+              <select id="task" formControlName="task" required="required">
+                <option *ngFor="let t of task" [ngValue] ="t.id">
+                  {{t.code}}
+                </option>
+              </select>
             </div>
-            <!--Hours -->
-             <div class="_clearfix"></div>
+          </div>
+          <!--Hours -->
+          <div class="_clearfix"></div>
             <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
                   <label class="label_txt col-sm-4" for="hours"> Hours<sup>*</sup></label>
@@ -48,7 +53,11 @@
             <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
                   <label class="label_txt col-sm-4" for="vacation_type_id"> Vacation Type <sup>*</sup></label>
-                  <input type="text" class="cust_input" formControlName="vacation_type_id"  placeholder="Enter Vacation Type" required/>
+                  <select id="vacation" formControlName="vacation" required="required">
+                    <option *ngFor="let v of vacation" [ngValue] ="v.id">
+                      {{v.title}}
+                    </option>
+                  </select>
                 </div>
             </div>
             <!--description/activity_log -->

@@ -20,7 +20,6 @@ import { HeaderComponent } from './header/header.component';
 import { TimeEntryComponent } from './time-entry/time-entry.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
-import { DatePickerComponent } from './date-picker/date-picker.component';
 
 
 @NgModule({
@@ -31,7 +30,6 @@ import { DatePickerComponent } from './date-picker/date-picker.component';
     TimeEntryComponent,
     FooterComponent,
     LoginComponent,
-    DatePickerComponent,
   ],
   imports: [
     BrowserModule,

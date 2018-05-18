@@ -49,4 +49,15 @@ export class DataSourceService {
       return res;
     });
   };
+
+  //get tasks
+  getTasks(reqObj): Observable<Object>{
+    return this.http.post("http://localhost:3000/api/get_tasks", reqObj, this.httpOptions).map(res =>{
+      console.log(res);
+      this.cs.setAuth(res)
+      return res;
+    });
+  };
+
+  
 }
