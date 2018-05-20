@@ -52,8 +52,11 @@ export class LoginComponent implements OnInit {
 
   			if(this.response.authentication_token){
           console.log('auth response:', res);
-          
-          this.router.navigate(['/time-entry']); 
+          if (this.response.user_type == "admin"){
+            this.router.navigate(['/approve-reject']);  
+          }else{
+            this.router.navigate(['/time-entry']); 
+          }
   			}else {
   				alert(this.response.message)
   			}

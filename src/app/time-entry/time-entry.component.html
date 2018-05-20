@@ -1,5 +1,6 @@
 <!--Date Selection -->
-<div style ="margin: auto; width: 100%; border: 3px solid #6AA6EE; padding: 10px">
+<div class="jumbotron" style ="margin: auto; width: 100%; padding: 10px">
+  <p>Today is {{today | date: 'EEEE, MMMM d, y' }}</p>
   <h4>Select Date for Timesheet:</h4>
   <select [(ngModel)] ="dSelected" (ngModelChange)='onDaySelected($event)'>
     <option *ngFor="let d of dropDown" [ngValue] ="d">
@@ -11,11 +12,10 @@
   {{modifiedtext}}
 </div>  
  
-<div class="body-wrapper clearfix">
+<div class="body-wrapper clearfix jumbotron">
   <section class="fSection">
     <div class="row form-field-wrapper">
       <div class="col-sm-12">
-        <p>Today is {{today | date: 'EEEE, MMMM d, y' }}</p>
         <form id="newEntryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
             <!--Project_Id-->
 

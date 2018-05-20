@@ -1,0 +1,47 @@
+<div class="approve-reject jumbotron" style ="margin: auto; width: 100%; border: 3px solid #6AA6EE; padding: 10px">
+	<div>
+		<a routerLink="/time-entry">Enter Timesheet</a>
+	</div>
+
+	<div class="row" style="padding:10px;">
+        <div class="col-sm-12">
+
+            <h4>Time Sheets Submitted for Approval</h4>
+		
+			<table class="table">
+				<thead>
+			  		<tr>
+					  	<th> Project</th>
+					    <th> Employee</th>
+					    <th> Start date</th>
+					    <th> End date</th>
+					    <th> Hours</th>
+					    <th></th>
+					    <th></th>
+					    <th></th>
+					    <th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let t of timesheet">
+						<td>{{t.project}}</td>
+                    	<td>{{t.employee}}</td>
+                    	<td>{{t.start}}</td>
+                    	<td>{{t.end}}</td>
+                    	<td>{{t.hours}}</td>
+                    	<td><button id= {{t.id}} (click)="approve($event)">Approve</button></td>
+                    	<td><button id= {{t.id}} (click)="reject($event.id)">Reject</button></td>
+
+
+
+					</tr>
+				</tbody>
+			</table>
+			
+        </div>
+    </div>
+
+
+
+
+</div>

@@ -59,5 +59,32 @@ export class DataSourceService {
     });
   };
 
+  //get submitted timesheet
+  getSubmittedTimesheet(reqObj): Observable<Object>{
+    return this.http.post("http://localhost:3000/api/get_submitted_timesheet", reqObj, this.httpOptions).map(res =>{
+      console.log(res);
+      this.cs.setAuth(res)
+      return res;
+    });
+  };
+
+  //approve timesheet
+  approve(reqObj): Observable<Object>{
+    return this.http.post("http://localhost:3000/api/approve", reqObj, this.httpOptions).map(res =>{
+      console.log(res);
+      this.cs.setAuth(res)
+      return res;
+    });
+  };
+
+  //reject submitted timesheet
+  reject(reqObj): Observable<Object>{
+    return this.http.post("http://localhost:3000/api/reject", reqObj, this.httpOptions).map(res =>{
+      console.log(res);
+      this.cs.setAuth(res)
+      return res;
+    });
+  };
+
   
 }

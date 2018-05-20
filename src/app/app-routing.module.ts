@@ -7,6 +7,7 @@ import { TimeEntryComponent} from './time-entry/time-entry.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
+import { ApproveRejectComponent } from './approve-reject/approve-reject.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,11 @@ const routes: Routes = [
   {
     path: 'time-entry',
     component: TimeEntryComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'approve-reject',
+    component: ApproveRejectComponent,
     canActivate: [AuthGuardService]
   }
  ];
