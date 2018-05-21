@@ -17,6 +17,7 @@ export class ApproveRejectComponent implements OnInit {
   timesheet: any[];
   reqObj:any = {};
   response:any;
+  hideRow:any=true;
 
   constructor(	private uAuthService: AuthService,
   				private router: Router,
@@ -85,4 +86,13 @@ export class ApproveRejectComponent implements OnInit {
     this.router.navigate(['/approve-reject']);
 
   };
+
+  show_row(row){
+  	if (row == true){
+  		this.hideRow = false;
+  	}
+  	else{
+  		this.hideRow = true;
+  	}
+  }
 }
