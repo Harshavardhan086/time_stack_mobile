@@ -2,16 +2,18 @@
 <div class="jumbotron" style ="margin: auto; width: 100%; padding: 10px">
   <p>Today is {{today | date: 'EEEE, MMMM d, y' }}</p>
   <h4>Select Date for Timesheet:</h4>
-  <select [(ngModel)] ="dSelected" (ngModelChange)='onDaySelected($event)'>
-    <option *ngFor="let d of dropDown" [ngValue] ="d">
-      {{d}}
-    </option>
-  </select>
-  <button type="submit"  class="btn cust_btn submit" (click) = "update_date(d)">Fetch</button>
-  <br>
-  {{modifiedtext}}
+  <div class="col-sm-12">
+    <select [(ngModel)] ="dSelected" (ngModelChange)='onDaySelected($event)'>
+      <option *ngFor="let d of dropDown" [ngValue] ="d">
+        {{d}}
+      </option>
+    </select>
+    <button type="submit"  class="btn cust_btn submit" (click) = "update_date(d)">Fetch</button>
+    <br>
+    {{modifiedtext}}
+  </div>
 </div>  
- 
+<hr/>
 <div class="body-wrapper clearfix jumbotron">
   <section class="fSection">
     <div class="row form-field-wrapper">
@@ -23,7 +25,7 @@
             <div class="col-sm-12">
               <label class="label_txt col-sm-4" for="project"> Project<sup>*</sup></label>
 
-                <select id="project" formControlName="project" required="required" (change)='loadTasks($event.target.value)'>
+                <select id="project" formControlName="project" (change)='loadTasks($event.target.value)' style="width:170px;" required>
                   <option *ngFor="let p of project" [ngValue] ="p.id">
                     {{p.name}}
                   </option>
@@ -34,7 +36,7 @@
           <div class="row" style="padding:10px;">
             <div class="col-sm-12">
               <label class="label_txt col-sm-4" for="task"> Tasks<sup>*</sup></label>
-              <select id="task" formControlName="task" required="required">
+              <select id="task" formControlName="task" style="width:170px;" required="required">
                 <option *ngFor="let t of task" [ngValue] ="t.id">
                   {{t.code}}
                 </option>
@@ -53,7 +55,8 @@
             <div class="row" style="padding:10px;">
                 <div class="col-sm-12">
                   <label class="label_txt col-sm-4" for="vacation_type_id"> Vacation Type <sup>*</sup></label>
-                  <select id="vacation" formControlName="vacation" required="required">
+                  <select id="vacation" formControlName="vacation" style="width:170px;" required="required">
+                    <option value=""></option>
                     <option *ngFor="let v of vacation" [ngValue] ="v.id">
                       {{v.title}}
                     </option>

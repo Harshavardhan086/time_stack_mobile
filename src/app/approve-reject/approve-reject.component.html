@@ -11,7 +11,7 @@
 			<table class="table">
 				<thead>
 			  		<tr>
-					  	<th> Project</th>
+					  	<th> Start Date</th>
 					    <th> Employee</th>
 					    <th> Hours</th>
 					    
@@ -19,20 +19,15 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let t of timesheet" (click)="show_row(hideRow)">
-						<td>{{t.project}}<br/>
-						<span *ngIf="!hideRow">{{t.start}}</span>
+						<td>{{t.start}}<br/>
+						<span *ngIf="!hideRow">{{t.end}}</span>
 						</td>
                     	<td>{{t.employee}}<br/>
-                    	<span *ngIf="!hideRow">{{t.end}}</span></td>
+                    	<span *ngIf="!hideRow">{{t.project}}</span></td>
                     	<td>{{t.hours}}<br/>
                     	<span *ngIf="!hideRow"><button id= {{t.id}} (click)="approve($event)">Approve</button><button id= {{t.id}} (click)="reject($event)">Reject</button></span>
                     	</td>
-                    </tr>
-
-                   		
-                    	
-                    
-                    
+                    </tr>        
 				</tbody>
 			</table>
 			
