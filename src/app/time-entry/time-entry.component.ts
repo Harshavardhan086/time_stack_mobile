@@ -46,6 +46,13 @@ export class TimeEntryComponent implements OnInit {
   				};
 
   ngOnInit() {
+ 
+    this.createForm();
+    this.getEntry();
+  };
+
+
+  getEntry(){
     this.reqObj.email = this.cs.getCurrentUser();
 
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
@@ -85,10 +92,8 @@ export class TimeEntryComponent implements OnInit {
         alert("Please Visit https://chronstack.com ")
       //this.router.navigate(['/home']);
     });
-    this.createForm();
-    this.ngOnInit(); 
-  };
-
+  }
+///
   onDaySelected(val:any){
       this.customFunction(val);
       console.log(val);
