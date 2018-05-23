@@ -21,8 +21,9 @@ export class ApiInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${this.jwtService.getToken()}`
       }
     });
-    return next.handle(req);
-
+    return next.handle(req).catch((error,caught)=>{
+      return Observable.throw(error)
+    })as any;
   }
 }
 

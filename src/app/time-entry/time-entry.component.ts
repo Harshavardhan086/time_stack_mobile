@@ -57,9 +57,9 @@ export class TimeEntryComponent implements OnInit {
         this.dropDown = this.timeEntry.date_of_activity;
         this.project = this.timeEntry.avaliable_projects;
         this.vacation = this.timeEntry.vacations;
-        console.log(this.dropDown)
-        
-        this.dSelected = Date.now();
+        //selects the first date for dropdown
+        this.dSelected = this.dropDown[0]
+        console.log("DropDown",this.dropDown[0])
         const entryDetails = this.timeEntry.timeEntry_hash;
           
         (<FormGroup>this.newEntryForm)
@@ -78,22 +78,23 @@ export class TimeEntryComponent implements OnInit {
           .patchValue({vacation_type_id: entryDetails.vacation_type_id}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
           .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
-          console.log(this.newEntryForm.value)
+          console.log(this.newEntryForm.value);
         }
       }, err => {
         console.log(err);
-        alert("Please Start Current Week on Desktop App!")
+        alert("Please Visit https://chronstack.com ")
       //this.router.navigate(['/home']);
     });
-    this.createForm(); 
+    this.createForm();
+    this.ngOnInit(); 
   };
 
   onDaySelected(val:any){
       this.customFunction(val);
-      console.log(val)
+      console.log(val);
     };  
   customFunction(val:any){
-      this.modifiedtext = "Time Entry Selection:" + val
+      this.modifiedtext = "Time Entry Selection: " + val
     };
 
   loadTasks(val:any){
@@ -161,6 +162,7 @@ export class TimeEntryComponent implements OnInit {
         (<FormGroup>this.newEntryForm)
           .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
           console.log(this.newEntryForm.value)
+
         }
       }, err => {
         console.log(err);
