@@ -176,10 +176,10 @@ export class TimeEntryComponent implements OnInit {
   };
 
   createEntry(data: any){
-    this.reqObj = this.newEntryForm.value;
     this.reqObj.email = this.cs.getCurrentUser();
+    this.reqObj = this.newEntryForm.value;
+    console.log("What I'm Sending", this.reqObj)
     console.log(this.reqObj)
-    //call the data.source method to deliver items
     this.ds.sendTimeEntry(this.reqObj).subscribe(timeEntry =>{
       this.timeEntry = timeEntry;
       if(this.timeEntry.status == 'ok'){
@@ -188,8 +188,6 @@ export class TimeEntryComponent implements OnInit {
     }, err => {
       console.log(err);
     });
-
-    this.router.navigate(['/time_entry'])
     alert("successful update");
   }
 };
