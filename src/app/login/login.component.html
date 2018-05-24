@@ -5,15 +5,15 @@
         <form id="loginForm" [formGroup]="loginForm" autocomplete="off" (ngSubmit)="login()">
           <div class="row">
             <div class="col-sm-12">
-              <label class="label_txt" for="userName">User Name</label>
-              <input type="text" class="cust_input" formControlName="userName"  placeholder="Enter Name" required/>
+              <i class="name_icon fa fa-user-circle-o" aria-hidden="true"></i>
+              <input type="text" class="cust_input" formControlName="userName"  placeholder="Username" required/>
             </div>
           </div>
           <div class="_clearfix"></div>
           <div class="row">
             <div class="col-sm-12">
-              <label class="label_txt" for="userPassword">Password</label>
-              <input type="password" class="cust_input" formControlName="userPassword"  placeholder="Enter Password" required/>
+              <i class="password_icon fa fa-lock" aria-hidden="true"></i>
+              <input type="password" class="cust_input" formControlName="userPassword"  placeholder="Password" required/>
             </div>
           </div>
           <div class="_clearfix"></div>

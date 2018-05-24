@@ -1,5 +1,5 @@
 #loginForm{
-  padding: 3em 4em;
+  padding: 3em 3em;
   background-color: #e9ecef;
 }
 
@@ -22,4 +22,23 @@
   color: #7b7b7b;
   font-size: 16px;
   font-weight: 500;
+}
+
+.name_icon {
+  position: relative;
+  padding: 10px;
+  left: -33px;
+  top: 38px;
+}
+
+.password_icon {
+  position: relative;
+  top: 35px;
+  left: -20px;
+}
+
+.cust_btn{
+  padding: 5px;
+  margin-top: 6px;
+  background-color:#2780E3;  
 }
