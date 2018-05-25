@@ -1,9 +1,22 @@
-h3 {
+
+body {
+   margin: 0;
+   padding: 0;
+}
+
+h3, h4 {
 	text-align: center;
 }
-.label_txt{
-	
+h4{
+    color: black;
+    font-weight: bold;
 }
+hr {
+  border:none;
+  border-top:1px dotted #b1b1b1;;
+  width:100%;
+}
+/* for input of dropdowns*/
 .cust_input{
     width: 250px;
     padding: 8px 10px;
@@ -14,8 +27,54 @@ h3 {
     font-weight: 500;
 }
 
-hr {
-  border:none;
-  border-top:1px dotted blue;
-  width:100%;
+.jumbotron{
+  margin: 10px 0px 0px 0px; 
+  width: 100%; 
+}     /* dropdown to choose time entry*/
+     .dateselect {
+          position: absolute;
+          margin: auto;
+          left: 25%;
+       } /* Manage the height of the first jumbotron*/
+       .unit1{
+        height: 10em;
+       }
+/* Styling for "today is ..."*/
+ .todaydate {
+  text-align: center;
+  text-shadow: 2px 2px 8px #b1b1b1;
+  font-size: 1.3em;
+ }
+ /* adjust the dropdown box width*/
+ #project, #task, #vacation {
+  width: 250px;
+  text-align: center;
 }
+ label {
+  font-family: tahoma;
+  color: black;
+  font-size: 1em;
+  font-weight: bold;
+  padding: .8em;
+ }
+button {
+    background-color: blue; /* Green */
+    border: none;
+    color: white;
+    padding: .6em 1.4em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    border-radius: 12px;
+    opacity: 0.8;
+}
+select {
+  background-color: white;
+}
+
+
+
+
+
+

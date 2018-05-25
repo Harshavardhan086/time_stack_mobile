@@ -1,61 +1,73 @@
 <!--Date Selection -->
-<div class="jumbotron" style ="margin: auto; width: 100%; padding: 10px">
-  <p>Today is {{today | date: 'EEEE, MMMM d, y' }}</p>
-  <h4>Select Date for Timesheet:</h4>
-  <div class="col-sm-12">
+
+<div class="container-fluid">
+<div class="jumbotron unit1">
+  <h4>Change Time Entry:</h4>
+  <div class="col-sm-12 dateselect">
     <select [(ngModel)] ="dSelected" (ngModelChange)='onDaySelected($event)'>
       <option *ngFor="let d of dropDown" [ngValue] ="d">
         {{d}}
       </option>
     </select>
-    <button type="submit"  class="btn cust_btn submit" (click) = "update_date(d)">Fetch</button>
-    <br>
-    {{modifiedtext}}
+    <button type="submit"  class="btn cust_btn submit" (click) = "update_date(d)">Change</button>
   </div>
-</div>  
+</div>  <!-- End Jumbo-->
+</div>
 <hr/>
+<div class = "todaydate">
+  <p>Today is {{today | date: 'EEEE, MMMM d, y' }}</p>
+</div>
+
+<div class="container-fluid">
 <div class="body-wrapper clearfix jumbotron">
   <section class="fSection">
     <div class="row form-field-wrapper">
       <div class="col-sm-12">
         <form id="newEntryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
-            <!--Project_Id-->
 
-          <div class="row" style="padding:10px;">
+<!--Project_Id-->
+          <div class="row" >
             <div class="col-sm-12">
-              <label class="label_txt col-sm-4" for="project"> Project<sup>*</sup></label>
+              <label class="label_txt col-sm-4" for="project"> Project:</label>
 
-                <select id="project" formControlName="project" (change)='loadTasks($event.target.value)' style="width:170px;" required>
+                <select id="project" formControlName="project" (change)='loadTasks($event.target.value)' required>
                   <option *ngFor="let p of project" [ngValue] ="p.id">
                     {{p.name}}
                   </option>
                 </select>
             </div>
           </div>
-          <!--Task_Id -->
-          <div class="row" style="padding:10px;">
+<!--Task_Id -->
+          <div class="row">
             <div class="col-sm-12">
-              <label class="label_txt col-sm-4" for="task"> Tasks<sup>*</sup></label>
-              <select id="task" formControlName="task" style="width:170px;" required="required">
+              <label class="label_txt col-sm-4" for="task"> Task:</label>
+              <select id="task" formControlName="task"  required="required">
                 <option *ngFor="let t of task" [ngValue] ="t.id">
                   {{t.code}}
                 </option>
               </select>
             </div>
           </div>
-          <!--Hours -->
+<!--Hours -->
           <div class="_clearfix"></div>
-            <div class="row" style="padding:10px;">
+            <div class="row">
                 <div class="col-sm-12">
-                  <label class="label_txt col-sm-4" for="hours"> Hours<sup>*</sup></label>
+                  <label class="label_txt col-sm-4" for="hours"> Hours Worked:</label>
                   <input type="text" class="cust_input" formControlName="hours"  placeholder="Enter Hours Worked" required/>
                 </div>
             </div>
-            <!--Vacation -->
-            <div class="row" style="padding:10px;">
+<!--description/activity_log -->
+            <div class="row">
                 <div class="col-sm-12">
-                  <label class="label_txt col-sm-4" for="vacation_type_id"> Vacation Type <sup>*</sup></label>
-                  <select id="vacation" formControlName="vacation" style="width:170px;" required="required">
+                  <label class="label_txt col-sm-4" for="description"> Description:</label>
+                  <input type="text" class="cust_input" formControlName="activity_log"  placeholder="Shift Details" required/>
+                </div>
+            </div>
+        <!--Vacation -->
+            <div class="row" >
+                <div class="col-sm-12">
+                  <label class="label_txt col-sm-4" for="vacation_type_id"> Vacation Type:</label>
+                  <select id="vacation" formControlName="vacation" required="required">
                     <option value=""></option>
                     <option *ngFor="let v of vacation" [ngValue] ="v.id">
                       {{v.title}}
@@ -63,16 +75,10 @@
                   </select>
                 </div>
             </div>
-            <!--description/activity_log -->
-            <div class="row" style="padding:10px;">
-                <div class="col-sm-12">
-                  <label class="label_txt col-sm-4" for="description"> Description<sup>*</sup></label>
-                  <input type="text" class="cust_input" formControlName="activity_log"  placeholder="Work notes" required/>
-                </div>
-            </div>
+            <br>
             <!-- send it off -->
             <div class="_clearfix"></div>
-            <div class="row" style="padding:10px;">
+            <div class="row">
                 <div class="col-sm-12 text-center">
                     <button type="submit" class="btn cust_btn submit" *ngIf="appointmentAction != 'Edit'">Submit</button>
                     <button type="submit" class="btn cust_btn submit" *ngIf="appointmentAction == 'Edit'">Update</button>
@@ -84,3 +90,6 @@
     </div>
   </section>
 </div>
+</div>
+
+<hr>
