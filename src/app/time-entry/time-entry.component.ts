@@ -59,7 +59,6 @@ export class TimeEntryComponent implements OnInit {
       console.log('timeEntry response:', res);
       
       this.timeEntry = res;
-      
       if (this.timeEntry.status === 'ok') {
         this.dropDown = this.timeEntry.date_of_activity;
         this.project = this.timeEntry.avaliable_projects;
@@ -87,10 +86,14 @@ export class TimeEntryComponent implements OnInit {
           .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
           console.log(this.newEntryForm.value);
         }
+      else { (this.timeEntry.status === 'not_found')
+        console.log("Not found");
+
+        }
       }, err => {
         console.log(err);
         alert("Please Visit https://chronstack.com ")
-      //this.router.navigate(['/home']);
+        //this.router.navigate(['/home']);
     });
   }
 ///
@@ -104,7 +107,7 @@ export class TimeEntryComponent implements OnInit {
 
   loadTasks(val:any){
 
-    this.reqObj.email = this.newEntryForm.value.user_id
+    this.reqObj.email = this.cs.getCurrentUser();
     this.reqObj.project_id= val;
     this.pSelected = val;
     console.log(this);
@@ -142,7 +145,7 @@ export class TimeEntryComponent implements OnInit {
   //update_date
   update_date(){
     this.reqObj.date_of_activity = this.dSelected
-    this.reqObj.email = this.newEntryForm.value.user_id
+    this.reqObj.email = this.cs.getCurrentUser();
     //pass the parameters
     this.ds.update_date(this.reqObj).subscribe(timeEntry =>{
       this.timeEntry = timeEntry;
@@ -182,8 +185,8 @@ export class TimeEntryComponent implements OnInit {
     console.log(this.reqObj)
     this.ds.sendTimeEntry(this.reqObj).subscribe(timeEntry =>{
       this.timeEntry = timeEntry;
-      if(this.timeEntry.status == 'ok'){
-        alert(this.timeEntry.message)
+      if(this.timeEntry.status === 'ok'){
+        console.log(this.timeEntry.message)
       }
     }, err => {
       console.log(err);

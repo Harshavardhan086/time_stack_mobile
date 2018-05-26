@@ -58,7 +58,7 @@ export class ApproveRejectComponent implements OnInit {
       }
       }, err => {
         console.log(err);
-        alert("Please Start Current Week on Desktop App!")
+        alert("Not Approved successfully")
         
     });
     this.router.navigate(['/approve-reject']);
@@ -75,12 +75,12 @@ export class ApproveRejectComponent implements OnInit {
     
     this.ds.reject(this.reqObj).subscribe(res => {
     	this.response = res;
-      if (this.response === 'ok') {
+      if (this.response.status === 'ok') {
         alert("Timesheet rejected")
       	}
       }, err => {
         console.log(err);
-        alert("Please Start Current Week on Desktop App!")
+        alert("Not rejected successfuly")
         
     });
     this.router.navigate(['/approve-reject']);
