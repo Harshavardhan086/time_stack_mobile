@@ -20,14 +20,14 @@ export class DataSourceService {
   }
   // Get user list
   getUsers(reqObj): Observable<Object>{
-	  return this.http.post("http://localhost:3000/api/login_user",reqObj, this.httpOptions).map(res=>{
+	  return this.http.post("https://dev3.resourcestack.com/api/login_user",reqObj, this.httpOptions).map(res=>{
       return res;
 	  });
   }
 
   //get time entry
   getTimeEntry(reqObj): Observable<Object>{
-    return this.http.post("http://localhost:3000/api/get_time_entry", reqObj, this.httpOptions).map(res =>{
+    return this.http.post("https://dev3.resourcestack.com/api/get_time_entry", reqObj, this.httpOptions).map(res =>{
       console.log(res);
       //this.cs.setAuth(res)
       return res;
@@ -36,14 +36,14 @@ export class DataSourceService {
    
   // Submit TimeEntry 
   sendTimeEntry(reqObj): Observable<Object>{
-    return this.http.post("http://localhost:3000/api/send_entry", reqObj, this.httpOptions).map(res =>{
+    return this.http.post("https://dev3.resourcestack.com/api/send_entry", reqObj, this.httpOptions).map(res =>{
       return res; 
     });
   };
 
   //Jump to another time entry
   update_date(reqObj): Observable<Object>{
-    return this.http.post("http://localhost:3000/api/update_date", reqObj, this.httpOptions).map(res =>{
+    return this.http.post("https://dev3.resourcestack.com/api/update_date", reqObj, this.httpOptions).map(res =>{
       console.log(res);
       //this.cs.setAuth(res)
       return res;
@@ -52,7 +52,7 @@ export class DataSourceService {
 
   //get tasks
   getTasks(reqObj): Observable<Object>{
-    return this.http.post("http://localhost:3000/api/get_tasks", reqObj, this.httpOptions).map(res =>{
+    return this.http.post("https://dev3.resourcestack.com/api/get_tasks", reqObj, this.httpOptions).map(res =>{
       console.log(res);
       //this.cs.setAuth(res)
       return res;
@@ -61,7 +61,7 @@ export class DataSourceService {
 
   //get submitted timesheet
   getSubmittedTimesheet(reqObj): Observable<Object>{
-    return this.http.post("http://localhost:3000/api/get_submitted_timesheet", reqObj, this.httpOptions).map(res =>{
+    return this.http.post("https://dev3.resourcestack.com/api/get_submitted_timesheet", reqObj, this.httpOptions).map(res =>{
       console.log(res);
       //this.cs.setAuth(res)
       return res;
@@ -70,7 +70,7 @@ export class DataSourceService {
 
   //approve timesheet
   approve(reqObj): Observable<Object>{
-    return this.http.post("http://localhost:3000/api/approve", reqObj, this.httpOptions).map(res =>{
+    return this.http.post("https://dev3.resourcestack.com/api/approve", reqObj, this.httpOptions).map(res =>{
       console.log(res);
       //this.cs.setAuth(res)
       return res;
@@ -79,7 +79,7 @@ export class DataSourceService {
 
   //reject submitted timesheet
   reject(reqObj): Observable<Object>{
-    return this.http.post("http://localhost:3000/api/reject", reqObj, this.httpOptions).map(res =>{
+    return this.http.post("https://dev3.resourcestack.com/api/reject", reqObj, this.httpOptions).map(res =>{
       console.log(res);
      // this.cs.setAuth(res)
       return res;
