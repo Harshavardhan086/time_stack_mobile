@@ -81,7 +81,7 @@ export class TimeEntryComponent implements OnInit {
         (<FormGroup>this.newEntryForm)
           .patchValue({hours: entryDetails.hours}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
-          .patchValue({vacation_type_id: entryDetails.vacation_type_id}, {onlySelf: true});
+          .patchValue({vacation: entryDetails.vacation_type_id}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
           .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
           console.log(this.newEntryForm.value);
@@ -178,7 +178,7 @@ export class TimeEntryComponent implements OnInit {
     this.createForm();
   };
 
-  createEntry(data: any){
+  createEntry(){
     this.reqObj.email = this.cs.getCurrentUser();
     this.reqObj = this.newEntryForm.value;
     console.log("What I'm Sending", this.reqObj)
