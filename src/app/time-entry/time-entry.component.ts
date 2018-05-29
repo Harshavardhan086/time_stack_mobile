@@ -128,11 +128,11 @@ export class TimeEntryComponent implements OnInit {
  
   createForm(){
     this.newEntryForm = this.fb.group({
-      project: [''],
+      project: ['',Validators.required],
       task: [''],
-      hours: [''],
+      hours: ['',[Validators.required,Validators.pattern('[0-9]')]],
       vacation: [''],
-      activity_log: [''],
+      activity_log: ['',[Validators.required,Validators.maxLength(100)]],
       user_id: [this.timeEntry.user_id],
       id: [this.timeEntry.id],
       week_id: [this.timeEntry.week_id]
@@ -179,6 +179,7 @@ export class TimeEntryComponent implements OnInit {
   };
 
   createEntry(){
+
     this.reqObj.email = this.cs.getCurrentUser();
     this.reqObj = this.newEntryForm.value;
     console.log("What I'm Sending", this.reqObj)

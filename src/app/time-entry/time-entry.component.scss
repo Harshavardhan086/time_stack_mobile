@@ -16,6 +16,33 @@ hr {
   border-top:1px dotted #b1b1b1;;
   width:100%;
 }
+ label {
+  font-family: tahoma;
+  color: black;
+  font-size: 1em;
+  font-weight: bold;
+  padding: .8em;
+ }
+button {
+    background-color: #2780E3;
+    border: none;
+    color: white;
+    padding: .6em 1.4em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    border-radius: 12px;
+    opacity: 0.8;
+}
+        
+        button[type="submit"]:disabled{
+        background-color: red;
+        }
+
+select {
+  background-color: white;
+}
 /* for input of dropdowns*/
 .cust_input{
     width: 250px;
@@ -26,19 +53,20 @@ hr {
     border: 1px solid #b1b1b1;
     font-weight: 500;
 }
+    .cust_input.ng-invalid{
+      border: 1px solid red;
+    }
 
 .jumbotron{
   margin: 10px 0px 0px 0px; 
   width: 100%; 
-}     /* dropdown to choose time entry*/
-     .dateselect {
-          position: absolute;
-          margin: auto;
-          left: 25%;
        } /* Manage the height of the first jumbotron*/
        .unit1{
         height: 10em;
+
+        margin: 0 auto;
        }
+
 /* Styling for "today is ..."*/
  .todaydate {
   text-align: center;
@@ -50,28 +78,25 @@ hr {
   width: 250px;
   text-align: center;
 }
- label {
-  font-family: tahoma;
-  color: black;
-  font-size: 1em;
-  font-weight: bold;
-  padding: .8em;
- }
-button {
-    background-color: blue; /* Green */
-    border: none;
-    color: white;
-    padding: .6em 1.4em;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1em;
-    border-radius: 12px;
-    opacity: 0.8;
-}
-select {
-  background-color: white;
-}
+
+
+.dateselect {
+          position: absolute;
+          margin: auto;
+          }
+      .dateselect select{
+          width: 200px;
+          text-align: center;
+          };
+
+
+
+@media screen and (orientation:landscape) {
+    div .dateselect{
+        margin: 0 auto;
+        left: 25%;
+        }
+} 
 
 
 
