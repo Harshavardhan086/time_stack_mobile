@@ -35,10 +35,6 @@ button {
     border-radius: 12px;
     opacity: 0.8;
 }
-        
-        button[type="submit"]:disabled{
-        background-color: red;
-        }
 
 select {
   background-color: white;
@@ -53,9 +49,7 @@ select {
     border: 1px solid #b1b1b1;
     font-weight: 500;
 }
-    .cust_input.ng-invalid{
-      border: 1px solid red;
-    }
+
 
 .jumbotron{
   margin: 10px 0px 0px 0px; 
@@ -89,8 +83,20 @@ select {
           text-align: center;
           };
 
+/* Validation styling */
+button[type="submit"]:disabled{
+        background-color: red;
+        }
+
+.cust_input.ng-invalid{
+      border: 1px solid red;
+    }
+select#project.ng-invalid{
+  border: 1px solid red;
+}
 
 
+/* Landscape styling */
 @media screen and (orientation:landscape) {
     div .dateselect{
         margin: 0 auto;
