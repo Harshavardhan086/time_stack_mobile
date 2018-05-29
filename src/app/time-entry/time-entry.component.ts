@@ -87,7 +87,7 @@ export class TimeEntryComponent implements OnInit {
           console.log(this.newEntryForm.value);
         }
       else { (this.timeEntry.status === 'not_found')
-        console.log("Not found");
+        alert("Not found");
 
         }
       }, err => {
@@ -178,20 +178,38 @@ export class TimeEntryComponent implements OnInit {
     this.createForm();
   };
 
-  createEntry(){
+
+  createEntry(status:string){
 
     this.reqObj.email = this.cs.getCurrentUser();
+    this.reqObj.status = status;
     this.reqObj = this.newEntryForm.value;
+    
     console.log("What I'm Sending", this.reqObj)
     console.log(this.reqObj)
     this.ds.sendTimeEntry(this.reqObj).subscribe(timeEntry =>{
       this.timeEntry = timeEntry;
       if(this.timeEntry.status === 'ok'){
         console.log(this.timeEntry.message)
+        alert(this.timeEntry.message);
+        this.newEntryForm.reset;
+      }else{
+        alert("Timesheet not saved/submitted")
       }
+      this.router.navigate(['/time-entry']);
     }, err => {
       console.log(err);
     });
-    alert("successful update");
+    
   }
+
+  submitTimesheet(){
+    if(confirm("Are you sure to submit complete week")) {
+      console.log("submit the timesheet");
+      this.createEntry('submit');
+    }else{
+    return false;
+    }
+  };
 };
+
