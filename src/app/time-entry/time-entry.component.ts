@@ -51,13 +51,10 @@ export class TimeEntryComponent implements OnInit {
     this.getEntry();
   };
 
-
   getEntry(){
     this.reqObj.email = this.cs.getCurrentUser();
-
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
       console.log('timeEntry response:', res);
-      
       this.timeEntry = res;
       if (this.timeEntry.status === 'ok') {
         this.dropDown = this.timeEntry.date_of_activity;
@@ -85,18 +82,28 @@ export class TimeEntryComponent implements OnInit {
         (<FormGroup>this.newEntryForm)
           .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
           console.log(this.newEntryForm.value);
-        }
+          console.log("looking for that status",entryDetails.status_id)
+          if (entryDetails.status_id === 2 || entryDetails.status_id ===3 || entryDetails.status_id ===4){
+            alert("This Timesheet is currently awaiting Approval");
+            this.router.navigate(['/home']);
+          }// inside if statement
+        }//end of if
       else { (this.timeEntry.status === 'not_found')
         alert("Not found");
-
+        this.router.navigate(['/home']);
         }
       }, err => {
         console.log(err);
         alert("Please Visit https://chronstack.com ")
-        //this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
     });
   }
-///
+
+//
+
+//
+
+
   onDaySelected(val:any){
       this.customFunction(val);
       console.log(val);
@@ -132,7 +139,7 @@ export class TimeEntryComponent implements OnInit {
       task: [''],
       hours: ['',[Validators.required,Validators.pattern('[0-9]')]],
       vacation: [''],
-      activity_log: ['',[Validators.required,Validators.maxLength(100)]],
+      activity_log: ['',[Validators.required,Validators.maxLength(500)]],
       user_id: [this.timeEntry.user_id],
       id: [this.timeEntry.id],
       week_id: [this.timeEntry.week_id]
