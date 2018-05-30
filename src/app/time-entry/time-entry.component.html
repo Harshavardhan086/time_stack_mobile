@@ -34,7 +34,7 @@
                     {{p.name}}
                   </option>
                 </select>
-                <span *ngIf="newEntryForm.invalid">Required</span>
+                <span *ngIf="newEntryForm.invalid">*</span>
             </div>
           </div>
 <!--Task_Id -->
@@ -54,7 +54,7 @@
                 <div class="col-sm-12">
                   <label class="label_txt col-sm-4" for="hours"><sup>*</sup>Hours Worked:</label>
                   <input type="text" class="cust_input" formControlName="hours"  placeholder="Enter Hours Worked" required />
-                    <span *ngIf="newEntryForm.invalid">Required</span>
+                    <span *ngIf="newEntryForm.invalid">*</span>
                 </div>
             </div>
 <!--description/activity_log -->
@@ -62,7 +62,7 @@
                 <div class="col-sm-12">
                   <label class="label_txt col-sm-4" for="description"><sup>*</sup> Description:</label>
                   <input type="text" class="cust_input" formControlName="activity_log"  placeholder="Shift Details"    />
-                  <span *ngIf="newEntryForm.invalid">Required</span>
+                  <span *ngIf="newEntryForm.invalid">*</span>
                 </div>
             </div>
         <!--Vacation -->

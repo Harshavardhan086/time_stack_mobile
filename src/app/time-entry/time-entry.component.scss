@@ -84,9 +84,6 @@ select {
           };
 
 /* Validation styling */
-button[type="submit"]:disabled{
-        background-color: red;
-        }
 
 .cust_input.ng-invalid{
       border: 1px solid red;
