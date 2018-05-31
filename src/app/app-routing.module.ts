@@ -33,7 +33,11 @@ const routes: Routes = [
     path: 'approve-reject',
     component: ApproveRejectComponent,
     canActivate: [AuthGuardService]
-  }
+  },
+   { 
+     path: '**', 
+     redirectTo: '/home', 
+     pathMatch: 'full'}
  ];
 
  @NgModule({
