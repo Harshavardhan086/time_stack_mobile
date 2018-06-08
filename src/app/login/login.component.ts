@@ -41,22 +41,15 @@ export class LoginComponent implements OnInit {
 
   login(){
   	this.userInfo = this.loginForm.value;
-
   	if(this.userInfo.userName && this.userInfo.userPassword){
   		this.reqTokenObj.email = this.userInfo.userName;
   		this.reqTokenObj.password = this.userInfo.userPassword;
   		this.uAuthService.getAuthToken(this.reqTokenObj).subscribe(res => {
-        console.log('auth response:', res);
   			this.response = res;
   			if(this.response.authentication_token){
           console.log('auth response:', res);
-          if (this.response.user_type == "admin"){
-            this.router.navigate(['/approve-reject']);  
-          }else{
-            this.router.navigate(['/time-entry']); 
-          }
+            this.router.navigate(['/#']);  
   			}else {
-  				alert(this.response.message);
           this.warning = "The email or password was incorrect. Please try again."
   			}
   		}, err=> {

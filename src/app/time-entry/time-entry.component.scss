@@ -8,11 +8,13 @@ h2{
   font-size: 1em;
   font-weight: bold;
   color: #000000;
+  text-shadow: 2px 2px 8px #b1b1b1;
 
 }
 
 h3, h4 {
 	text-align: center;
+  text-shadow: 2px 2px 8px #b1b1b1;
 }
 h4{
     color: black;
@@ -42,6 +44,12 @@ button {
     border-radius: 12px;
     opacity: 0.8;
 }
+.alreadydone{
+  text-align: center;
+  font-size: 1.3em;
+  color: #B82601;
+  font-weight: bold;
+}
 
 select {
   background-color: white;
@@ -57,7 +65,6 @@ select {
     font-weight: 500;
 }
 
-
 .jumbotron{
   margin: 10px 0px 0px 0px; 
   width: 100%; 
@@ -68,12 +75,6 @@ select {
         margin: 0 auto;
        }
 
-/* Styling for "today is ..."*/
- .todaydate {
-  text-align: center;
-  text-shadow: 2px 2px 8px #b1b1b1;
-  font-size: 1.3em;
- }
  /* adjust the dropdown box width*/
  #project, #task, #vacation {
   width: 250px;

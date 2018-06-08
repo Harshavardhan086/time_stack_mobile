@@ -16,17 +16,16 @@
 </div>  <!-- End Jumbo-->
 </div>
 <hr/>
-<div class = "todaydate">
-  <p>Today is {{today | date: 'EEEE, MMMM d, y' }}</p>
-</div>
-
 <div class="container-fluid">
 <div class="body-wrapper clearfix jumbotron">
   <section class="fSection">
     <div class="row form-field-wrapper">
       <div class="col-sm-12">
+        <h4 class ="currentEntry"> Current Entry: {{displayDay}}</h4>
         <form id="newEntryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry('save')">
 
+
+          <p class="alreadydone">{{warning1| uppercase}}</p>
 <!--Project_Id-->
           <div class="row" >
             <div class="col-sm-12">
@@ -84,18 +83,15 @@
             <div class="_clearfix"></div>
             <div class="row">
                 <div class="col-sm-12 text-center">
-
-                    <button type="submit" [disabled]="!newEntryForm.valid" class="btn cust_btn submit">_Save_</button>
-                    <button type="button" class="btn cust_btn submit" (click)="submitTimesheet()">Submit</button>
+                    <h2>
+                        {{warning}}
+                    </h2>
+                    <button type="submit" [disabled]="!newEntryForm.valid" class="btn cust_btn submit">Save Entry</button>
 
                 </div>
             </div>
 
         </form>
-        <br>
-        <h2>
-            {{warning}}
-        </h2>
       </div>
     </div>
   </section>

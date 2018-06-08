@@ -3,6 +3,8 @@
     <div class="login-card">
       <h4>Welcome, Login </h4>
       <h4>to Chronstack</h4>
+            <br>
+      <h2>{{warning}}</h2>
       <form id="loginForm" [formGroup]="loginForm" autocomplete="off" (ngSubmit)="login()">
         <i class="name_icon fa fa-user-circle-o" aria-hidden="true"></i>
         <input type="text" formControlName="userName"  placeholder="Username" required/>
@@ -10,8 +12,7 @@
         <input type="password" formControlName="userPassword"  placeholder="Password" required/>
         <input type="submit" class="login login-submit" value="Login">
       </form>
-      <br>
-      <h2>{{warning}}</h2>
+
     </div> 
   </section>
 </div>
