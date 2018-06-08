@@ -1,3 +1,27 @@
+.jumbotron{
+	padding-top: 50%;
+	padding-bottom: 50%;
+}
+
 h3 {
 	text-align: center;
+}
+
+.btn{
+	margin: 1px 0px 1px 1px;
+	width: 12em;
+	background-color: #062F4F;
+}
+.btn:hover {
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #062F4F;
+  opacity: 0.5;
+  margin: 1px 0px 1px 1px;
+}
+
+ul{
+	list-style: none;
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
 }

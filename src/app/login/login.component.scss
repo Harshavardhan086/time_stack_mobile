@@ -3,6 +3,19 @@
 //  background-color: #e9ecef;
 //}
 
+h4 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+h2{
+  font-size: 1.2em;
+  color: #B82601;
+  font-weight: bold;
+  text-align: center;
+
+}
+
 .cust_input{
   width: 250px;
   padding: 8px 10px;
@@ -111,6 +124,7 @@ body {
 /* border-radius: 3px; */
 /* -webkit-user-select: none;
   user-select: none; */
+  background-color: #062F4F;
 }
 
 .login-submit {
@@ -118,7 +132,7 @@ body {
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #4d90fe;
+  background-color: #062F4F;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 
@@ -126,7 +140,8 @@ body {
   /* border: 1px solid #2f5bb7; */
   border: 0px;
   text-shadow: 0 1px rgba(0,0,0,0.3);
-  background-color: #357ae8;
+  background-color: #062F4F;
+  opacity: 0.5;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
 

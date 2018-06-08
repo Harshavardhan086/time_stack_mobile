@@ -21,7 +21,7 @@ import { TimeEntryComponent } from './time-entry/time-entry.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { ApproveRejectComponent } from './approve-reject/approve-reject.component';
-import { UserComponent } from './user/user.component';
+
 
 
 @NgModule({
@@ -33,7 +33,6 @@ import { UserComponent } from './user/user.component';
     FooterComponent,
     LoginComponent,
     ApproveRejectComponent,
-    UserComponent,
   ],
   imports: [
     BrowserModule,

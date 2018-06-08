@@ -3,6 +3,13 @@ body {
    margin: 0;
    padding: 0;
 }
+h2{
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  color: #000000;
+
+}
 
 h3, h4 {
 	text-align: center;
@@ -13,7 +20,7 @@ h4{
 }
 hr {
   border:none;
-  border-top:1px dotted #b1b1b1;;
+  border-top:1px dotted #062F4F;;
   width:100%;
 }
  label {
@@ -24,7 +31,7 @@ hr {
   padding: .8em;
  }
 button {
-    background-color: #2780E3;
+    background-color: #062F4F;
     border: none;
     color: white;
     padding: .6em 1.4em;
@@ -46,7 +53,7 @@ select {
     font-size: 16px;
     position: relative;
     color: #666;
-    border: 1px solid #b1b1b1;
+    border: 1px solid ;
     font-weight: 500;
 }
 
@@ -86,10 +93,10 @@ select {
 /* Validation styling */
 
 .cust_input.ng-invalid{
-      border: 1px solid red;
+      border: 1px solid #B82601;
     }
 select#project.ng-invalid{
-  border: 1px solid red;
+  border: 1px solid #B82601;
 }
 
 

@@ -5,6 +5,7 @@ import { CurrentUserService } from '../services/current-user.service';
 import { DataSourceService } from '../services/data-source.service';
 import { AuthService } from '../services/auth.service';
 
+
 @Component({
   selector: 'app-time-entry',
   templateUrl: './time-entry.component.html',
@@ -38,6 +39,9 @@ export class TimeEntryComponent implements OnInit {
   vacationHash: any={};
   vSelected:Number;
 
+//Alert Message
+  warning: string;
+  
   constructor(	private fb: FormBuilder,
         				private router: Router,
         				private uAuthService: AuthService,
@@ -199,9 +203,10 @@ export class TimeEntryComponent implements OnInit {
       if(this.timeEntry.status === 'ok'){
         console.log(this.timeEntry.message)
         alert(this.timeEntry.message);
+         this.warning = "Your timesheet has been saved!"
         this.newEntryForm.reset;
-      }else{
-        alert("Timesheet not saved/submitted")
+      } else {
+        this.warning = "Timesheet not saved/submitted"
       }
       this.router.navigate(['/time-entry']);
     }, err => {

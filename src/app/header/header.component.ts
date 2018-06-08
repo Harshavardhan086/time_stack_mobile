@@ -29,6 +29,15 @@ export class HeaderComponent implements OnInit {
   	this.router.navigate(['/home']);
   };
 
+  isLogout(){
+    this.currentUser = this.cs.getCurrentUser()
+    if(this.currentUser == null) {
+      return false;
+    } else {
+      return true;
+    }
+  };//islogout
+
   isLogin(){
     this.currentUser = this.cs.getCurrentUser()
     if(this.currentUser == null) {
@@ -36,7 +45,8 @@ export class HeaderComponent implements OnInit {
     } else {
       return false;
     }
-  }//islogin
+  };//islogin
+
 }//export
 
 

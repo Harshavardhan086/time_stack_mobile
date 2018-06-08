@@ -1,7 +1,17 @@
 <div class="jumbotron">
-  <h3>Simplified Employee Time Entry and Reporting</h3>
+	  <h3><strong>Simplified </strong>Employee Time Entry and Reporting</h3>
+		  <hr>
+		  <br>
+
+	<div class="row justify-content-center">	
+		<ul>
+			<li>
+				<button type="button" class="btn btn-secondary" (click)="entryClick();">Time-Entry</button>
+			</li>
+			<li>
+				<button type="button" class="btn btn-secondary" (click)="approveClick();"> Approval Screen</button>
+			</li>
+		</ul>
+	</div>
 </div>
-<div class="container text-center">
-    <p>Today is {{today | date: 'EEEE, MMMM d, y' }}</p>
-    <a routerLink="/time-entry">Enter Timesheet</a>
-</div>
+

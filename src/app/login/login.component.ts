@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { CurrentUserService } from '../services/current-user.service';
 import { Router, RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
 	response:any;
   timeEntry: any;
   hours: any;
+  warning: string;
 
 
 
@@ -45,11 +47,7 @@ export class LoginComponent implements OnInit {
   		this.reqTokenObj.password = this.userInfo.userPassword;
   		this.uAuthService.getAuthToken(this.reqTokenObj).subscribe(res => {
         console.log('auth response:', res);
-        //console.log('auth response headers: ', res.headers.toJSON()); //log the response header to show the auth token
-
-        //console.log('auth response body:', res.json()); //log the response body to show the user 
   			this.response = res;
-
   			if(this.response.authentication_token){
           console.log('auth response:', res);
           if (this.response.user_type == "admin"){
@@ -58,7 +56,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/time-entry']); 
           }
   			}else {
-  				alert(this.response.message)
+  				alert(this.response.message);
+          this.warning = "The email or password was incorrect. Please try again."
   			}
   		}, err=> {
   			console.log(err)
@@ -66,6 +65,7 @@ export class LoginComponent implements OnInit {
 
   	} else {
   		return false;
+
   	};
   }
 

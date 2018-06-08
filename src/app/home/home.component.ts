@@ -10,9 +10,14 @@ export class HomeComponent implements OnInit {
 
   today = Date.now();	
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
-
+  entryClick(){
+  	this.router.navigate(['/time-entry']);
+  };
+  approveClick(){
+  	this.router.navigate(['/approve-reject']);
+  }
 }

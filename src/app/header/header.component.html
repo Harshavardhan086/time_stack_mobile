@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" style="border-bottom: 2px solid #2780E3">
+<nav class="navbar navbar-default" style="border-bottom: 2px solid #062F4F">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#"><img style="height:1.8em;" src="assets/chronstack.jpg"></a>
@@ -7,6 +7,11 @@
     <ul class="nav navbar-nav">
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="home"  title="Home"><i class="fa fa-home"></i></a>
+      </li> 
+      <li class="nav-item" routerLinkActive="active" *ngIf="isLogout()">
+        <a class="nav-link" routerLink="time-entry"  title="timeentry"><i class="fa fa-calendar"></i></a>
+      </li>
+      
       <li class="nav-item" routerLinkActive="active" *ngIf="isLogin()">
         <a class="nav-link" routerLink="login"><i class="fa fa-user"></i></a>
       </li>
