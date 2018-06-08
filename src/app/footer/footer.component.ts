@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CurrentUserService } from '../services/current-user.service';
+import { AuthGuardService } from '../services/auth-guard.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cs: CurrentUserService, 
+              private router:Router,) { }
 
   ngOnInit() {
   }
 
+    logout(){
+  	this.cs.purgeAuth();
+  	this.router.navigate(['/home']);
+  };
+  
 }
