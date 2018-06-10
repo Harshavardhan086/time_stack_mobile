@@ -61,7 +61,8 @@ export class ApproveRejectComponent implements OnInit {
         alert("Not Approved successfully")
         
     });
-    this.router.navigate(['/approve-reject']);
+    window.location.reload();
+    
   };
 
 
@@ -83,7 +84,8 @@ export class ApproveRejectComponent implements OnInit {
         alert("Not rejected successfuly")
         
     });
-    this.router.navigate(['/approve-reject']);
+    //this.router.navigate(['/approve-reject']);
+    window.location.reload();
 
   };
 
