@@ -9,6 +9,7 @@ import { AuthGuardService } from '../services/auth-guard.service';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
+  currentUser: string;
 
   constructor(private cs: CurrentUserService, 
               private router:Router,) { }
@@ -16,9 +17,27 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
   }
 
-    logout(){
+  logout(){
   	this.cs.purgeAuth();
   	this.router.navigate(['/home']);
   };
+
+  isLogout(){
+    this.currentUser = this.cs.getCurrentUser()
+    if(this.currentUser == null) {
+      return true;
+    } else {
+      return false;
+    }
+  };//islogout
+
+  isLogin(){
+    this.currentUser = this.cs.getCurrentUser()
+    if(this.currentUser == null) {
+      return false;
+    } else {
+      return true;
+    }
+  };//islogin
   
 }

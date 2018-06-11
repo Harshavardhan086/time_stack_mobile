@@ -10,11 +10,11 @@
       <a class="nav-link" routerLink="time-entry"  title="timeentry"><i class="fa fa-calendar"></i>
       </a>
     </button>
-    <button type="button" class="btn btn-light">
+    <button type="button" class="btn btn-light" *ngIf="isLogout()">
       <a class="nav-link" routerLink="login"><i class="fa fa-user"></i>
       </a>
     </button>
-    <button type="button" class="btn btn-light">
+    <button type="button" class="btn btn-light" *ngIf="isLogin()">
       <a class="nav-link" routerLink="logout" (click)="logout()"><i class="fa fa-sign-out"></i>
       </a>
     </button>
