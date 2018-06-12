@@ -67,7 +67,7 @@ export class TimeEntryComponent implements OnInit {
       };
       //console.log("umm", dayta)
       var dayta = dateObj.year + "/" + dateObj.month +"/"+ dateObj.day
-      this.displayDay = dayta
+      //this.displayDay = dayta
     }
 
   }
@@ -90,9 +90,12 @@ export class TimeEntryComponent implements OnInit {
         this.project = this.timeEntry.avaliable_projects;
         this.vacation = this.timeEntry.vacations;
         //selects the first date for dropdown
-        this.dSelected = this.dropDown[0]
+        
         console.log("DropDown",this.dropDown[0])
         const entryDetails = this.timeEntry.timeEntry_hash;
+
+        this.dSelected = entryDetails.date_of_activity;
+        this.displayDay = entryDetails.date_of_activity;
 
         (<FormGroup>this.newEntryForm)
           .patchValue({id: entryDetails.id}, {onlySelf: true});
@@ -112,8 +115,6 @@ export class TimeEntryComponent implements OnInit {
           .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
           .patchValue({date_of_activity: entryDetails.date_of_activity}, {onlySelf: true});
-          this.displayDay = entryDetails.date_of_activity
-          let dateObj: any = this.getDateObject(this.displayDay)
           console.log(this.newEntryForm.value);
           console.log("looking for that status",entryDetails.status_id)
           
@@ -192,6 +193,8 @@ export class TimeEntryComponent implements OnInit {
         this.dropDown = this.timeEntry.date_of_activity;
         console.log(this.dropDown)
         const entryDetails = this.timeEntry.timeEntry_hash;
+        this.dSelected = entryDetails.date_of_activity;
+        this.displayDay = entryDetails.date_of_activity;
         (<FormGroup>this.newEntryForm)
           .patchValue({id: entryDetails.id}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
@@ -210,9 +213,7 @@ export class TimeEntryComponent implements OnInit {
           .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
           .patchValue({date_of_activity: entryDetails.date_of_activity}, {onlySelf: true});
-          this.displayDay = entryDetails.date_of_activity
-          let dateObj: any = this.getDateObject(this.displayDay)
-          console.log(this.newEntryForm.value)
+        console.log(this.newEntryForm.value)
 
         }
       }, err => {
