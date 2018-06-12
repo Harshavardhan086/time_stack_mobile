@@ -41,7 +41,7 @@ import { ApproveRejectComponent } from './approve-reject/approve-reject.componen
     FormsModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, AuthGuardService, JwtService ,CurrentUserService, DataSourceService,
+  providers: [AuthService, AuthGuardService, JwtService ,CurrentUserService, DataSourceService, TimeEntryComponent,
       { 
       provide: HTTP_INTERCEPTORS, 
       useClass: ApiInterceptor, 

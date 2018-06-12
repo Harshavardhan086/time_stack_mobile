@@ -4,6 +4,8 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormArray, NgForm} fro
 import { CurrentUserService } from '../services/current-user.service';
 import { DataSourceService } from '../services/data-source.service';
 import { AuthService } from '../services/auth.service';
+import { HomeComponent } from '../home/home.component'
+
 
 
 @Component({
@@ -44,6 +46,9 @@ export class TimeEntryComponent implements OnInit {
 
 //startdate
  displayDay: any=[]; 
+
+ //
+ weekID:Number;  
   
   constructor(	private fb: FormBuilder,
         				private router: Router,
@@ -55,26 +60,6 @@ export class TimeEntryComponent implements OnInit {
     this.createForm();
     this.getEntry();
   };
-
-  // get day,month & year by date format
-  getDateObject(date){
-    if(date){
-      let tempDate:any = date;
-      let dateObj: any = {
-        day: new Date(tempDate).getDate() + 1,
-        month: new Date(tempDate).getMonth() + 1,
-        year: new Date(tempDate).getFullYear()
-      };
-      //console.log("umm", dayta)
-      var dayta = dateObj.year + "/" + dateObj.month +"/"+ dateObj.day
-      //this.displayDay = dayta
-    }
-
-  }
-
-
-
-
 
 //
   getEntry(){
@@ -89,9 +74,11 @@ export class TimeEntryComponent implements OnInit {
         this.dropDown = this.timeEntry.date_of_activity;
         this.project = this.timeEntry.avaliable_projects;
         this.vacation = this.timeEntry.vacations;
+        this.weekID = this.timeEntry.timeEntry_hash.week_id;
+
         //selects the first date for dropdown
-        
         console.log("DropDown",this.dropDown[0])
+        console.log("WeekID", this.weekID)
         const entryDetails = this.timeEntry.timeEntry_hash;
 
         this.dSelected = entryDetails.date_of_activity;
@@ -117,6 +104,7 @@ export class TimeEntryComponent implements OnInit {
           .patchValue({date_of_activity: entryDetails.date_of_activity}, {onlySelf: true});
           console.log(this.newEntryForm.value);
           console.log("looking for that status",entryDetails.status_id)
+          console.log("WEEK ID ", this.weekID)
           
         }//end of if
       else { (this.timeEntry.status === 'not_found')
@@ -223,7 +211,7 @@ export class TimeEntryComponent implements OnInit {
   };
 
 
-  createEntry(status:string){
+  createEntry(){
 
     this.reqObj = this.newEntryForm.value;
     this.reqObj.email = this.cs.getCurrentUser();
@@ -238,19 +226,29 @@ export class TimeEntryComponent implements OnInit {
          this.router.navigate(['/time-entry']); 
       } 
     }, err => {
-      this.warning = "Timesheet not saved/submitted"
+      this.warning = "Timesheet not saved/submitted" 
       console.log(err);
     });
     
   }
-
   submitTimesheet(){
-    if(confirm("Are you sure to submit complete week")) {
-      console.log("submit the timesheet");
-      this.createEntry('submit');
-    }else{
-    return false;
-    }
-  };
+    console.log("Did we make it?",this.weekID)
+    this.getEntry();
+    this.reqObj.email = this.cs.getCurrentUser();
+    this.reqObj.week_id = this.weekID
+    this.ds.submitWeek(this.reqObj).subscribe(timeEntry =>{
+      console.log("My Params", this.reqObj)
+    });
+    
+  }
+//
+//  submitTimesheet(){
+//    if(confirm("Are you sure to submit complete week")) {
+//      console.log("submit the timesheet");
+//      this.createEntry('submit');
+//    }else{
+//    return false;
+//    }
+//  };
 };
 
