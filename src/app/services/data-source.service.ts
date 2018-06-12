@@ -86,5 +86,14 @@ export class DataSourceService {
     });
   };
 
+    // submit timesheet
+  submitWeek(reqObj): Observable<Object>{
+    return this.http.post("https://dev3.resourcestack.com/api/submit_week", reqObj, this.httpOptions).map(res =>{
+      console.log(res);
+     // this.cs.setAuth(res)
+      return res;
+    });
+  };
+
   
 }
