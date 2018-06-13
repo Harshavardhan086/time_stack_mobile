@@ -62,8 +62,8 @@ export class ApproveRejectComponent implements OnInit {
     
     this.ds.approve(this.reqObj).subscribe(res => {
     	this.response = res;
-      window.location.href = this.URL;
-      //If this doesn't work, got back to = '#';
+      window.location.href = '#';
+
       if (this.response.status === 'ok') {
 
       }
@@ -87,7 +87,7 @@ export class ApproveRejectComponent implements OnInit {
     
     this.ds.reject(this.reqObj).subscribe(res => {
     	this.response = res;
-      window.location.href = this.URL;
+      window.location.href = '#';
       if (this.response.status === 'ok') {
 
       	}
