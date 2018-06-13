@@ -22,7 +22,7 @@
     <div class="row form-field-wrapper">
       <div class="col-sm-12">
         <h4 class ="currentEntry"> Current Entry: {{displayDay}}</h4>
-        <form id="newEntryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry('save')">
+        <form id="newEntryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
 
 
           <p class="alreadydone">{{warning1| uppercase}}</p>
