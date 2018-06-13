@@ -31,6 +31,7 @@ export class ApproveRejectComponent implements OnInit {
   }
   findURL(){
     this.URL = window.location.href
+    console.log("Working?", this.URL)
   }
 
   loadSheet(){
@@ -62,6 +63,7 @@ export class ApproveRejectComponent implements OnInit {
     this.ds.approve(this.reqObj).subscribe(res => {
     	this.response = res;
       window.location.href = this.URL;
+      //If this doesn't work, got back to = '#';
       if (this.response.status === 'ok') {
 
       }
