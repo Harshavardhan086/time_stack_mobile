@@ -25,7 +25,10 @@ export class ApproveRejectComponent implements OnInit {
         		private ds: DataSourceService) { }
 
   ngOnInit() {
-  	this.reqObj.email = this.cs.getCurrentUser();
+    this.loadSheet();
+  }
+  loadSheet(){
+        this.reqObj.email = this.cs.getCurrentUser();
 
     this.ds.getSubmittedTimesheet(this.reqObj).subscribe(res => {
       console.log('timesheet response:', res);
@@ -34,13 +37,12 @@ export class ApproveRejectComponent implements OnInit {
       this.timesheet = this.submitted.timesheet;
       
       if (this.submitted.status === 'ok') {
-      	console.log("successful")
+        console.log("successful")
       }else{
-      	console.log("successful")
+        console.log("successful")
       }
-  	});
+    });
   }
-
 
   approve(event: any){
 
