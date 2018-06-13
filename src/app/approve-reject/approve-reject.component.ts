@@ -55,15 +55,16 @@ export class ApproveRejectComponent implements OnInit {
     
     this.ds.approve(this.reqObj).subscribe(res => {
     	this.response = res;
+      window.location.reload();
       if (this.response.status === 'ok') {
-        alert("Timesheet approved")
+
       }
       }, err => {
         console.log(err);
-        alert("Not Approved successfully")
+
         
     });
-    window.location.reload();
+
     
   };
 
@@ -78,16 +79,17 @@ export class ApproveRejectComponent implements OnInit {
     
     this.ds.reject(this.reqObj).subscribe(res => {
     	this.response = res;
+      window.location.href = '#';
       if (this.response.status === 'ok') {
-        alert("Timesheet rejected")
+
       	}
       }, err => {
         console.log(err);
-        alert("Not rejected successfuly")
+
         
     });
     //this.router.navigate(['/approve-reject']);
-    window.location.reload();
+      
 
   };
 
