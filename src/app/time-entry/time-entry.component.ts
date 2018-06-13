@@ -250,7 +250,6 @@ export class TimeEntryComponent implements OnInit {
      } else {
        this.warning2 = "Week has been submitted"
        this.jwtService.destroyWeek();
-       window.location.href ='#'
      };
 
     this.ds.submitWeek(this.reqObj).subscribe(timeEntry =>{
@@ -259,7 +258,6 @@ export class TimeEntryComponent implements OnInit {
       console.log("My Params", this.reqObj)
     }
     }, err =>{
-
       console.log(err);
     });
     
