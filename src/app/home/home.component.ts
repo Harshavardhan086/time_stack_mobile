@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   today = Date.now();	
   currentUser: string;
   currentWeek: Number;
-  warning: string = "NOTICE: Clicking Submit will submit the week for approval"
+  warning: string; 
 
 
 

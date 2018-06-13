@@ -18,6 +18,7 @@ export class ApproveRejectComponent implements OnInit {
   reqObj:any = {};
   response:any;
   hideRow:any=true;
+  URL: string;
 
   constructor(	private uAuthService: AuthService,
   				private router: Router,
@@ -26,7 +27,12 @@ export class ApproveRejectComponent implements OnInit {
 
   ngOnInit() {
     this.loadSheet();
+    this.findURL();
   }
+  findURL(){
+    this.URL = window.location.href
+  }
+
   loadSheet(){
         this.reqObj.email = this.cs.getCurrentUser();
 
@@ -55,7 +61,7 @@ export class ApproveRejectComponent implements OnInit {
     
     this.ds.approve(this.reqObj).subscribe(res => {
     	this.response = res;
-      window.location.reload();
+      window.location.href = this.URL;
       if (this.response.status === 'ok') {
 
       }
@@ -79,7 +85,7 @@ export class ApproveRejectComponent implements OnInit {
     
     this.ds.reject(this.reqObj).subscribe(res => {
     	this.response = res;
-      window.location.href = '#';
+      window.location.href = this.URL;
       if (this.response.status === 'ok') {
 
       	}
