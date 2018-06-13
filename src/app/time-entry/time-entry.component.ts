@@ -5,6 +5,7 @@ import { CurrentUserService } from '../services/current-user.service';
 import { DataSourceService } from '../services/data-source.service';
 import { AuthService } from '../services/auth.service';
 import { HomeComponent } from '../home/home.component'
+import { JwtService } from '../services/jwt.service';
 
 
 
@@ -43,22 +44,28 @@ export class TimeEntryComponent implements OnInit {
 //Alert Message
   warning: string;
   warning1: string;
+  warning2: string;
 
 //startdate
  displayDay: any=[]; 
 
  //
  weekID:Number;  
+
+ //
+ 
   
   constructor(	private fb: FormBuilder,
         				private router: Router,
         				private uAuthService: AuthService,
         				private cs: CurrentUserService,
-        				private ds: DataSourceService){};
+        				private ds: DataSourceService,
+                private jwtService: JwtService){};
 
   ngOnInit() {
     this.createForm();
     this.getEntry();
+  
   };
 
 //
@@ -67,50 +74,48 @@ export class TimeEntryComponent implements OnInit {
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
       console.log('timeEntry response:', res);
       this.timeEntry = res;
-      if(this.timeEntry === null){
-        this.warning1 = "your timesheet has already been submitted."
-      }
+      if(this.timeEntry == null){
+        this.warning1 = "Your timesheet has been submitted."
+      } 
       if (this.timeEntry.status === 'ok') {
         this.dropDown = this.timeEntry.date_of_activity;
         this.project = this.timeEntry.avaliable_projects;
         this.vacation = this.timeEntry.vacations;
         this.weekID = this.timeEntry.timeEntry_hash.week_id;
+        this.jwtService.saveWeek(this.weekID);
 
         //selects the first date for dropdown
         console.log("DropDown",this.dropDown[0])
         console.log("WeekID", this.weekID)
-        const entryDetails = this.timeEntry.timeEntry_hash;
+       const entryDetails = this.timeEntry.timeEntry_hash;
+       this.dSelected = entryDetails.date_of_activity;
+       this.displayDay = entryDetails.date_of_activity;
+       (<FormGroup>this.newEntryForm)
+         .patchValue({id: entryDetails.id}, {onlySelf: true});
+       (<FormGroup>this.newEntryForm)
+         .patchValue({user_id: entryDetails.user_id}, {onlySelf: true});
+       (<FormGroup>this.newEntryForm)
+         .patchValue({week_id: entryDetails.week_id}, {onlySelf: true});
+       (<FormGroup>this.newEntryForm)
+         .patchValue({task: entryDetails.task_id}, {onlySelf: true});
+       (<FormGroup>this.newEntryForm)
+         .patchValue({project: entryDetails.project_id}, {onlySelf: true});
+       (<FormGroup>this.newEntryForm)
+         .patchValue({hours: entryDetails.hours}, {onlySelf: true});
+       (<FormGroup>this.newEntryForm)
+         .patchValue({vacation: entryDetails.vacation_type_id}, {onlySelf: true});
+       (<FormGroup>this.newEntryForm)
+         .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
+       (<FormGroup>this.newEntryForm)
+         .patchValue({date_of_activity: entryDetails.date_of_activity}, {onlySelf: true});
 
-        this.dSelected = entryDetails.date_of_activity;
-        this.displayDay = entryDetails.date_of_activity;
-
-        (<FormGroup>this.newEntryForm)
-          .patchValue({id: entryDetails.id}, {onlySelf: true});
-        (<FormGroup>this.newEntryForm)
-          .patchValue({user_id: entryDetails.user_id}, {onlySelf: true});
-        (<FormGroup>this.newEntryForm)
-          .patchValue({week_id: entryDetails.week_id}, {onlySelf: true});
-        (<FormGroup>this.newEntryForm)
-          .patchValue({task: entryDetails.task_id}, {onlySelf: true});
-        (<FormGroup>this.newEntryForm)
-          .patchValue({project: entryDetails.project_id}, {onlySelf: true});
-        (<FormGroup>this.newEntryForm)
-          .patchValue({hours: entryDetails.hours}, {onlySelf: true});
-        (<FormGroup>this.newEntryForm)
-          .patchValue({vacation: entryDetails.vacation_type_id}, {onlySelf: true});
-        (<FormGroup>this.newEntryForm)
-          .patchValue({activity_log: entryDetails.activity_log}, {onlySelf: true});
-        (<FormGroup>this.newEntryForm)
-          .patchValue({date_of_activity: entryDetails.date_of_activity}, {onlySelf: true});
-          console.log(this.newEntryForm.value);
-          console.log("looking for that status",entryDetails.status_id)
-          console.log("WEEK ID ", this.weekID)
-          
         }//end of if
+
       else { (this.timeEntry.status === 'not_found')
         this.warning = "Hmmm, seems you don't have a timesheet for this week."
         this.router.navigate(['/home']);
         }
+
       }, err => {
         console.log(err);
         this.warning = "Hmmm, seems to be a problem with your timesheet."
@@ -118,6 +123,7 @@ export class TimeEntryComponent implements OnInit {
 
     });
   }
+
 
 //
 
@@ -172,6 +178,7 @@ export class TimeEntryComponent implements OnInit {
 
   //update_date
   update_date(){
+    this.warning = ""
     this.reqObj.date_of_activity = this.dSelected
     this.reqObj.email = this.cs.getCurrentUser();
     //pass the parameters
@@ -231,13 +238,28 @@ export class TimeEntryComponent implements OnInit {
     });
     
   }
+
   submitTimesheet(){
-    console.log("Did we make it?",this.weekID)
-    this.getEntry();
+
     this.reqObj.email = this.cs.getCurrentUser();
-    this.reqObj.week_id = this.weekID
+    this.reqObj.week_id = this.jwtService.getWeek()
+    this.reqObj.status = status
+
+     if(this.reqObj.week_id == null){
+       this.warning2 = "Submit Failed"
+     } else {
+       this.warning2 = "Week has been submitted"
+     };
+
     this.ds.submitWeek(this.reqObj).subscribe(timeEntry =>{
+      this.timeEntry = timeEntry
+      if(this.timeEntry.status === "ok"){
       console.log("My Params", this.reqObj)
+      this.jwtService.destroyWeek();
+    }
+    }, err =>{
+
+      console.log(err);
     });
     
   }

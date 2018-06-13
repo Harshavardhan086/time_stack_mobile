@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
   			this.response = res;
   			if(this.response.authentication_token){
           console.log('auth response:', res);
-            this.router.navigate(['/#']);  
+            console.log("user type", this.response.user_type)
+            window.location.href = '#' 
   			}else {
           this.warning = "The email or password was incorrect. Please try again."
   			}

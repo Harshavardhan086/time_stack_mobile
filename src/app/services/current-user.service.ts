@@ -44,6 +44,7 @@ export class CurrentUserService {
     // Save JWT sent from server in localstorage
     this.jwtService.saveToken(user.authentication_token);
     this.jwtService.saveCurrentUser(user.email);
+    this.jwtService.saveRole(user.user_type)
     this.isLoggedInUser = true;
     // Set current user data into observable
     this.currentUserSubject.next(user);
@@ -56,6 +57,8 @@ export class CurrentUserService {
   }
 
   purgeAuth() {
+    this.jwtService.destroyWeek();
+    this.jwtService.destroyRole();
     // Remove JWT from localstorage
     this.jwtService.destroyToken();
     // remove current user

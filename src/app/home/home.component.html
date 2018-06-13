@@ -5,23 +5,22 @@
 
 	<div class="row justify-content-center">	
 		<ul>
-
 			<li>
-				<a class="navbar-brand" href="#" >RESET PAGE</a>
+				<button type="button" class="btn btn-secondary" (click)="entryClick();">Enter Time</button>
 			</li>
-			<li>
-
-				<button type="button" class="btn btn-secondary" (click)="entryClick();">Time-Entry</button>
-
-			</li>
-			<li>
+			<li *ngIf="isUserAdmin()">
 				<button type="button" class="btn btn-secondary" (click)="approveClick();"> Approval Screen</button>
 			</li>
-			<li>
-				<button type="button" class="btn btn-secondary" (click)="submission()">Submit</button>
+			<li *ngIf="isWeek()">
+				<button type="submit" class="btn btn-secondary" (click)="submission();">Submit</button>				
 			</li>
 		</ul>
-		
-	</div>
-	<p>Clicking Submit, will submit your entire week for approval</p>
 </div>
+		<ul class="row justify-content-center">
+			<li *ngIf="isLogout()"> <p>Welcome, Please Log In</li>
+			<li *ngIf="isWeek()">{{warning}}</li>
+		</ul>
+</div>
+		
+		
+	
