@@ -245,14 +245,9 @@ export class TimeEntryComponent implements OnInit {
     this.reqObj.week_id = this.jwtService.getWeek()
     this.reqObj.status = status
 
-     if(this.reqObj.week_id == null){
-       this.warning2 = "Submit Failed"
-     } else {
-       this.warning2 = "Week has been submitted"
-       this.jwtService.destroyWeek();
-     };
 
     this.ds.submitWeek(this.reqObj).subscribe(timeEntry =>{
+      this.warning2 = "Week has been submitted1"
       console.log("My Params", this.reqObj)
       this.timeEntry = timeEntry
       if(this.timeEntry.status === "ok"){

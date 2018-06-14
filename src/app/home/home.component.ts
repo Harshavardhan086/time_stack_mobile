@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   currentUser: string;
   currentWeek: Number;
   warning: string; 
+  week_id: Number;
 
 
 
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    this.warning = "NOTICE: Clicking Submit will submit the week for approval"
+    this.imessage();
     this.tec.getEntry();
   };
 
@@ -39,8 +40,24 @@ export class HomeComponent implements OnInit {
   };
   submission(){
     this.tec.submitTimesheet();
-    this.warning = this.tec.warning2;
+    this.week_id = this.jwtService.getWeek()
+     if(this.week_id != null){
+       this.warning = "Week has been submitted";
+       this.jwtService.destroyWeek();
+     } else {
+       this.warning = "Week was not submitted";
+     };
+
   };
+  //proper message
+    imessage(){
+    this.currentWeek = this.jwtService.getWeek()
+    if(this.currentWeek == null) {
+      this.warning =" Week has been submitted"
+    } else {
+      this.warning = "NOTICE: Clicking Submit will submit the week for approval"
+    }
+  };//isWeek
 
 
   isLogout(){
@@ -60,7 +77,6 @@ export class HomeComponent implements OnInit {
       return true;
     }
   };//isWeek
-
 
   isUserAdmin(){
     this.currentUser = this.jwtService.getRole()
