@@ -19,7 +19,7 @@ export class FooterComponent implements OnInit {
 
   logout(){
   	this.cs.purgeAuth();
-  	this.router.navigate(['/home']);
+  	window.location.href = "#";
   };
 
   isLogout(){

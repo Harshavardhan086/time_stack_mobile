@@ -26,8 +26,9 @@ export class HomeComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    this.imessage();
+    
     this.tec.getEntry();
+    this.imessage();
   };
 
   entryClick(){
@@ -52,12 +53,13 @@ export class HomeComponent implements OnInit {
   //proper message
     imessage(){
     this.currentWeek = this.jwtService.getWeek()
-    if(this.currentWeek == null) {
-      this.warning =" Week has been submitted"
-    } else {
+    this.currentUser = this.jwtService.getCurrentUser()
+    if(this.currentUser != null && this.currentWeek != null) {
       this.warning = "NOTICE: Clicking Submit will submit the week for approval"
-    }
-  };//isWeek
+    } else if (this.currentUser == null && this.currentWeek == null) {
+      this.warning =" Week has been submitted"
+    } 
+  };
 
 
   isLogout(){
