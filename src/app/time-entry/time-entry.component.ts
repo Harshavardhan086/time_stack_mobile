@@ -253,9 +253,10 @@ export class TimeEntryComponent implements OnInit {
      };
 
     this.ds.submitWeek(this.reqObj).subscribe(timeEntry =>{
+      console.log("My Params", this.reqObj)
       this.timeEntry = timeEntry
       if(this.timeEntry.status === "ok"){
-      console.log("My Params", this.reqObj)
+      console.log("successful Submit")
     }
     }, err =>{
       console.log(err);
