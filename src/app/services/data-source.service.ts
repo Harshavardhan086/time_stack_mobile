@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { CurrentUserService } from '../services/current-user.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class DataSourceService {
 	token:any;
 	httpOptions:any;
+  baseUrl: string;
 
   constructor(private http: HttpClient, private cs: CurrentUserService) { 
   		this.token = this.cs.getAutToken();
   		this.setHeaderOption();
+      this.baseUrl = environment.baseUrl;
   }
 
   setHeaderOption(){
@@ -20,14 +23,14 @@ export class DataSourceService {
   }
   // Get user list
   getUsers(reqObj): Observable<Object>{
-	  return this.http.post("https://dev3.resourcestack.com/api/login_user",reqObj, this.httpOptions).map(res=>{
+	  return this.http.post(this.baseUrl +"/login_user",reqObj, this.httpOptions).map(res=>{
       return res;
 	  });
   }
 
   //get time entry
   getTimeEntry(reqObj): Observable<Object>{
-    return this.http.post("https://dev3.resourcestack.com/api/get_time_entry", reqObj, this.httpOptions).map(res =>{
+    return this.http.post(this.baseUrl +"/get_time_entry", reqObj, this.httpOptions).map(res =>{
       console.log(res);
       //this.cs.setAuth(res)
       return res;
@@ -36,14 +39,14 @@ export class DataSourceService {
    
   // Submit TimeEntry 
   sendTimeEntry(reqObj): Observable<Object>{
-    return this.http.post("https://dev3.resourcestack.com/api/send_entry", reqObj, this.httpOptions).map(res =>{
+    return this.http.post(this.baseUrl +"/send_entry", reqObj, this.httpOptions).map(res =>{
       return res; 
     });
   };
 
   //Jump to another time entry
   update_date(reqObj): Observable<Object>{
-    return this.http.post("https://dev3.resourcestack.com/api/update_date", reqObj, this.httpOptions).map(res =>{
+    return this.http.post(this.baseUrl +"/update_date", reqObj, this.httpOptions).map(res =>{
       console.log(res);
       //this.cs.setAuth(res)
       return res;
@@ -52,7 +55,7 @@ export class DataSourceService {
 
   //get tasks
   getTasks(reqObj): Observable<Object>{
-    return this.http.post("https://dev3.resourcestack.com/api/get_tasks", reqObj, this.httpOptions).map(res =>{
+    return this.http.post(this.baseUrl +"/get_tasks", reqObj, this.httpOptions).map(res =>{
       console.log(res);
       //this.cs.setAuth(res)
       return res;
@@ -61,7 +64,7 @@ export class DataSourceService {
 
   //get submitted timesheet
   getSubmittedTimesheet(reqObj): Observable<Object>{
-    return this.http.post("https://dev3.resourcestack.com/api/get_submitted_timesheet", reqObj, this.httpOptions).map(res =>{
+    return this.http.post(this.baseUrl +"/get_submitted_timesheet", reqObj, this.httpOptions).map(res =>{
       console.log(res);
       //this.cs.setAuth(res)
       return res;
@@ -70,7 +73,7 @@ export class DataSourceService {
 
   //approve timesheet
   approve(reqObj): Observable<Object>{
-    return this.http.post("https://dev3.resourcestack.com/api/approve", reqObj, this.httpOptions).map(res =>{
+    return this.http.post(this.baseUrl +"/approve", reqObj, this.httpOptions).map(res =>{
       console.log(res);
       //this.cs.setAuth(res)
       return res;
@@ -79,7 +82,7 @@ export class DataSourceService {
 
   //reject submitted timesheet
   reject(reqObj): Observable<Object>{
-    return this.http.post("https://dev3.resourcestack.com/api/reject", reqObj, this.httpOptions).map(res =>{
+    return this.http.post(this.baseUrl +"/reject", reqObj, this.httpOptions).map(res =>{
       console.log(res);
      // this.cs.setAuth(res)
       return res;
@@ -88,7 +91,7 @@ export class DataSourceService {
 
     // submit timesheet
   submitWeek(reqObj): Observable<Object>{
-    return this.http.post("https://dev3.resourcestack.com/api/submit_week", reqObj, this.httpOptions).map(res =>{
+    return this.http.post(this.baseUrl +"/submit_week", reqObj, this.httpOptions).map(res =>{
       console.log(res);
      // this.cs.setAuth(res)
       return res;
