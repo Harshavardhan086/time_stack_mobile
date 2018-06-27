@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   loggedUserInfo:any;
   loggedin: boolean;
   currentUser: string;
-  today = Date.now(); 
+  today = Date.now();
 
  
   constructor(private cs: CurrentUserService, 

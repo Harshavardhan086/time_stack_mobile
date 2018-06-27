@@ -77,7 +77,7 @@ export class TimeEntryComponent implements OnInit {
       if(this.timeEntry == null){
         this.warning1 = "Your timesheet has been submitted."
       } 
-      if (this.timeEntry.status === 'ok') {
+      if (this.timeEntry != null && this.timeEntry.status === 'ok') {
         this.dropDown = this.timeEntry.date_of_activity;
         this.project = this.timeEntry.avaliable_projects;
         this.vacation = this.timeEntry.vacations;
@@ -111,7 +111,7 @@ export class TimeEntryComponent implements OnInit {
 
         }//end of if
 
-      else { (this.timeEntry.status === 'not_found')
+      else { (this.timeEntry != null && this.timeEntry.status === 'not_found')
         this.warning = "Hmmm, seems you don't have a timesheet for this week."
         this.router.navigate(['/home']);
         }

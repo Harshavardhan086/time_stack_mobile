@@ -31,6 +31,7 @@
             <div class="col-sm-12">
               <label class="label_txt col-sm-4" for="project">Project:<sup>*</sup></label>
                 <select id="project" formControlName="project" (change)='loadTasks($event.target.value)'  >
+                  <option value=""></option>
                   <option *ngFor="let p of project" [ngValue] ="p.id">
                     {{p.name}}
                   </option>
