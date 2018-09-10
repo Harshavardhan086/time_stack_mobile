@@ -10,7 +10,6 @@ import { AuthGuardService } from '../services/auth-guard.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  loggedUserInfo:any;
   loggedin: boolean;
   currentUser: string;
   today = Date.now();
@@ -21,23 +20,8 @@ export class HeaderComponent implements OnInit {
              ) { }
 
   ngOnInit() {
-  	this.loggedUserInfo = this.cs.getCurrentUser();
     this.isLogin();
   }
-
-  logout(){
-  	this.cs.purgeAuth();
-  	this.router.navigate(['/home']);
-  };
-
-  isLogout(){
-    this.currentUser = this.cs.getCurrentUser()
-    if(this.currentUser == null) {
-      return false;
-    } else {
-      return true;
-    }
-  };//islogout
 
   isLogin(){
     this.currentUser = this.cs.getCurrentUser()

@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   currentWeek: Number;
   warning: string; 
   week_id: Number;
+  weekPresence: Boolean = false;
 
 
 
@@ -26,49 +27,54 @@ export class HomeComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    
-    this.tec.getEntry();
+    this.warning = ""
     this.imessage();
+    console.log("Checking for values",this.jwtService.getWeek())
   };
+
 
   entryClick(){
-  	this.router.navigate(['/time-entry']);
+    if(this.jwtService.getWeek() != undefined){
+      console.log("with Week")
+      this.tec.getEntry();
+      this.router.navigate(['/time-entry']);
 
+    } else {
+      console.log("Without Week")
+      this.router.navigate(['/time-entry']);
+    }
+    
   };
+
   approveClick(){
   	this.router.navigate(['/approve-reject']);
 
   };
+
   submission(){
     this.tec.submitTimesheet();
-    this.week_id = this.jwtService.getWeek()
-     if(this.week_id != null){
-       this.warning = "Week has been submitted";
-       this.jwtService.destroyWeek();
-     } else {
-       this.warning = "Week was not submitted";
-     };
+    this.warning = "Week has been submitted"
+  }
 
-  };
   //proper message
     imessage(){
+    console.log("Week?",this.currentWeek)
     this.currentWeek = this.jwtService.getWeek()
     this.currentUser = this.jwtService.getCurrentUser()
-    if(this.currentUser != null && this.currentWeek != null) {
-      this.warning = "NOTICE: Clicking Submit will submit the week for approval"
-    } else if (this.currentUser == null && this.currentWeek == null) {
-      this.warning =" Week has been submitted"
-    } 
+    console.log("currentWeek",this.currentWeek,"currentUser",this.currentUser)
+    if(this.currentUser != null && this.currentWeek != undefined) {
+      this.warning = "NOTICE: Clicking Submit will submit the week for approval"}
+      else {
+        console.log("me")
+      }
   };
 
 
   isLogout(){
+    console.log("looking",this.currentUser)
     this.currentUser = this.cs.getCurrentUser()
     if(this.currentUser == null) {
-      return true;
-    } else {
-      return false;
-    };
+      this.weekPresence = true };
   };//islogout
 
   isWeek(){
@@ -85,6 +91,7 @@ export class HomeComponent implements OnInit {
     console.log("Looking at the role",this.currentUser)
     if(this.currentUser != "admin") {
       return false;
+     
     } else {
       return true; 
     }

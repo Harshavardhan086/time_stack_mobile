@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../services/auth.service';
 import { CurrentUserService } from '../services/current-user.service';
 import { Router, RouterModule } from '@angular/router';
+import { TimeEntryComponent } from '../time-entry/time-entry.component'
 
 
 @Component({
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, 
               private cs: CurrentUserService, 
               private uAuthService: AuthService, 
-              private router: Router) { 
+              private router: Router,
+              private tec: TimeEntryComponent) { 
       this.createForm();
   }
 
@@ -40,19 +42,21 @@ export class LoginComponent implements OnInit {
   };
 
   login(){
+    this.warning = ""
   	this.userInfo = this.loginForm.value;
   	if(this.userInfo.userName && this.userInfo.userPassword){
   		this.reqTokenObj.email = this.userInfo.userName;
   		this.reqTokenObj.password = this.userInfo.userPassword;
   		this.uAuthService.getAuthToken(this.reqTokenObj).subscribe(res => {
   			this.response = res;
-  			if(this.response.authentication_token){
-          console.log('auth response:', res);
-            console.log("user type", this.response.user_type)
-            window.location.href = '#' 
-  			}else {
-          this.warning = "The email or password was incorrect. Please try again."
-  			}
+        if(this.response.status == 'ok'){
+        window.location.reload();
+        window.location.href=('#') } 
+        else {
+          this.warning =this.response.message
+        }
+
+
   		}, err=> {
   			console.log(err)
   		});

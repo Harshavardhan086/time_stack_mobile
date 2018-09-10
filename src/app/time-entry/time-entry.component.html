@@ -16,6 +16,7 @@
 </div>  <!-- End Jumbo-->
 </div>
 <hr/>
+<p class="alreadydone">{{warning1| uppercase}}</p>
 <div class="container-fluid">
 <div class="body-wrapper clearfix jumbotron">
   <section class="fSection">
@@ -24,8 +25,6 @@
         <h4 class ="currentEntry"> Current Entry: {{displayDay}}</h4>
         <form id="newEntryForm" [formGroup]="newEntryForm" autocomplete="off" (ngSubmit)="createEntry()">
 
-
-          <p class="alreadydone">{{warning1| uppercase}}</p>
 <!--Project_Id-->
           <div class="row" >
             <div class="col-sm-12">

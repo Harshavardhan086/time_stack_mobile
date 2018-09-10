@@ -19,7 +19,7 @@ export class FooterComponent implements OnInit {
 
   logout(){
   	this.cs.purgeAuth();
-  	window.location.href = "#";
+  	window.location.reload();
   };
 
   isLogout(){

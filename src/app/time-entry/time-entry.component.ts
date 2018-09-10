@@ -52,6 +52,7 @@ export class TimeEntryComponent implements OnInit {
  //
  weekID:Number;  
 
+
  //
  
   
@@ -63,8 +64,9 @@ export class TimeEntryComponent implements OnInit {
                 private jwtService: JwtService){};
 
   ngOnInit() {
-    this.createForm();
+    
     this.getEntry();
+    this.createForm();
   
   };
 
@@ -74,9 +76,7 @@ export class TimeEntryComponent implements OnInit {
     this.ds.getTimeEntry(this.reqObj).subscribe(res => {
       console.log('timeEntry response:', res);
       this.timeEntry = res;
-      if(this.timeEntry == null){
-        this.warning1 = "Your timesheet has been submitted."
-      } 
+     
       if (this.timeEntry != null && this.timeEntry.status === 'ok') {
         this.dropDown = this.timeEntry.date_of_activity;
         this.project = this.timeEntry.avaliable_projects;
@@ -84,12 +84,15 @@ export class TimeEntryComponent implements OnInit {
         this.weekID = this.timeEntry.timeEntry_hash.week_id;
         this.jwtService.saveWeek(this.weekID);
 
+
         //selects the first date for dropdown
         console.log("DropDown",this.dropDown[0])
         console.log("WeekID", this.weekID)
        const entryDetails = this.timeEntry.timeEntry_hash;
        this.dSelected = entryDetails.date_of_activity;
        this.displayDay = entryDetails.date_of_activity;
+
+
        (<FormGroup>this.newEntryForm)
          .patchValue({id: entryDetails.id}, {onlySelf: true});
        (<FormGroup>this.newEntryForm)
@@ -109,18 +112,13 @@ export class TimeEntryComponent implements OnInit {
        (<FormGroup>this.newEntryForm)
          .patchValue({date_of_activity: entryDetails.date_of_activity}, {onlySelf: true});
 
-        }//end of if
-
-      else { (this.timeEntry != null && this.timeEntry.status === 'not_found')
-        this.warning = "Hmmm, seems you don't have a timesheet for this week."
-        this.router.navigate(['/home']);
+        } else {
+          this.warning1 ="Entry for this week has been submitted!"
         }
 
       }, err => {
         console.log(err);
         this.warning = "Hmmm, seems to be a problem with your timesheet."
-        this.router.navigate(['/home']);
-
     });
   }
 
@@ -190,8 +188,7 @@ export class TimeEntryComponent implements OnInit {
         const entryDetails = this.timeEntry.timeEntry_hash;
         this.dSelected = entryDetails.date_of_activity;
         this.displayDay = entryDetails.date_of_activity;
-        (<FormGroup>this.newEntryForm)
-          .patchValue({id: entryDetails.id}, {onlySelf: true});
+        
         (<FormGroup>this.newEntryForm)
           .patchValue({user_id: entryDetails.user_id}, {onlySelf: true});
         (<FormGroup>this.newEntryForm)
@@ -219,7 +216,7 @@ export class TimeEntryComponent implements OnInit {
 
 
   createEntry(){
-
+    console.log("Check mic 1 2 3",this.newEntryForm.value)
     this.reqObj = this.newEntryForm.value;
     this.reqObj.email = this.cs.getCurrentUser();
     this.reqObj.status = status;
@@ -227,7 +224,7 @@ export class TimeEntryComponent implements OnInit {
     this.ds.sendTimeEntry(this.reqObj).subscribe(timeEntry =>{
       this.timeEntry = timeEntry;
       if(this.timeEntry.status === 'ok'){
-        console.log(this.timeEntry.message) 
+        console.log("Time Entry Message",this.timeEntry.message) 
         console.log("WHAT IS THE STATUS",this.reqObj.status)
          this.warning = "Your timesheet has been saved!"
          this.router.navigate(['/time-entry']); 
@@ -245,13 +242,12 @@ export class TimeEntryComponent implements OnInit {
     this.reqObj.week_id = this.jwtService.getWeek()
     this.reqObj.status = status
 
-
     this.ds.submitWeek(this.reqObj).subscribe(timeEntry =>{
-      this.warning2 = "Week has been submitted1"
       console.log("My Params", this.reqObj)
       this.timeEntry = timeEntry
       if(this.timeEntry.status === "ok"){
       console.log("successful Submit")
+      this.jwtService.destroyWeek()
     }
     }, err =>{
       console.log(err);
